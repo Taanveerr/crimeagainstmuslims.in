@@ -17,84 +17,45 @@
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg:       #05060e;
-  --surface:  #0b0d1c;
-  --card:     #10132a;
-  --border:   #1a1d35;
-  --border2:  #242848;
-  --red:      #f03e3e;
-  --orange:   #fd7e14;
-  --amber:    #f59f00;
-  --teal:     #20c997;
-  --blue:     #4dabf7;
-  --violet:   #9775fa;
-  --pink:     #f783ac;
-  --text:     #e8eaf6;
-  --muted:    #555880;
-  --syne:     'Syne', sans-serif;
-  --mono:     'DM Mono', monospace;
-  --body:     'DM Sans', sans-serif;
+  --bg:      #05060e;
+  --surface: #0b0d1c;
+  --card:    #10132a;
+  --border:  #1a1d35;
+  --border2: #242848;
+  --red:     #f03e3e;
+  --orange:  #fd7e14;
+  --amber:   #f59f00;
+  --teal:    #20c997;
+  --blue:    #4dabf7;
+  --violet:  #9775fa;
+  --pink:    #f783ac;
+  --ig:      #e1306c;
+  --ig2:     #833ab4;
+  --text:    #e8eaf6;
+  --muted:   #555880;
+  --syne:    'Syne', sans-serif;
+  --mono:    'DM Mono', monospace;
+  --body:    'DM Sans', sans-serif;
 }
-
 * { margin:0; padding:0; box-sizing:border-box; }
 html, body { height:100%; overflow:hidden; }
-
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: var(--body);
-  display: flex;
-  flex-direction: column;
-}
+body { background:var(--bg); color:var(--text); font-family:var(--body); display:flex; flex-direction:column; }
 
 /* ── TOPBAR ── */
 .topbar {
-  height: 52px;
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  padding: 0 20px;
-  gap: 20px;
-  flex-shrink: 0;
-  z-index: 3000;
+  height:52px; background:var(--surface);
+  border-bottom:1px solid var(--border);
+  display:flex; align-items:center;
+  padding:0 16px; gap:14px;
+  flex-shrink:0; z-index:3000;
 }
+.brand { font-family:var(--syne); font-size:13px; font-weight:800; letter-spacing:1px; color:var(--red); text-transform:uppercase; white-space:nowrap; }
+.brand span { color:var(--text); }
 
-.brand {
-  font-family: var(--syne);
-  font-size: 14px;
-  font-weight: 800;
-  letter-spacing: 1px;
-  color: var(--red);
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-
-.brand span { color: var(--text); }
-
-.topbar-filters {
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-  flex: 1;
-}
-
-.tf {
-  padding: 4px 11px;
-  border: 1px solid var(--border2);
-  background: transparent;
-  color: var(--muted);
-  font-family: var(--mono);
-  font-size: 10px;
-  border-radius: 20px;
-  cursor: pointer;
-  transition: all 0.15s;
-  white-space: nowrap;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-.tf:hover { border-color: var(--amber); color: var(--amber); }
-.tf.on { color: #000; font-weight: 500; }
+.topbar-filters { display:flex; gap:5px; flex-wrap:wrap; flex:1; }
+.tf { padding:3px 10px; border:1px solid var(--border2); background:transparent; color:var(--muted); font-family:var(--mono); font-size:10px; border-radius:20px; cursor:pointer; transition:all 0.15s; white-space:nowrap; text-transform:uppercase; letter-spacing:0.5px; }
+.tf:hover { border-color:var(--amber); color:var(--amber); }
+.tf.on { color:#000; font-weight:500; }
 .tf[data-type="Mob Lynching"].on     { background:var(--red);    border-color:var(--red); }
 .tf[data-type="Physical Assault"].on { background:var(--orange);  border-color:var(--orange); }
 .tf[data-type="Property Attack"].on  { background:var(--teal);    border-color:var(--teal); }
@@ -103,447 +64,340 @@ body {
 .tf[data-type="Threats/Coercion"].on { background:var(--blue);    border-color:var(--blue); }
 .tf[data-type="all"].on              { background:var(--amber);   border-color:var(--amber); }
 
-.topbar-right {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex-shrink: 0;
-}
+.topbar-right { display:flex; align-items:center; gap:10px; flex-shrink:0; }
+.stat-pill { background:var(--card); border:1px solid var(--border2); padding:3px 9px; border-radius:20px; font-family:var(--mono); font-size:10px; white-space:nowrap; }
+.stat-pill b { color:var(--red); }
 
-.stat-pill {
-  background: var(--card);
-  border: 1px solid var(--border2);
-  padding: 4px 10px;
-  border-radius: 20px;
-  font-family: var(--mono);
-  font-size: 10px;
-  white-space: nowrap;
-}
+.view-btns { display:flex; border:1px solid var(--border2); border-radius:6px; overflow:hidden; }
+.vb { padding:5px 10px; background:transparent; border:none; color:var(--muted); font-family:var(--mono); font-size:10px; cursor:pointer; transition:all 0.12s; text-transform:uppercase; }
+.vb + .vb { border-left:1px solid var(--border2); }
+.vb.on { background:var(--red); color:#fff; }
 
-.stat-pill b { color: var(--red); }
-
-.view-btns {
-  display: flex;
-  border: 1px solid var(--border2);
-  border-radius: 6px;
-  overflow: hidden;
+/* Instagram feed toggle button */
+.ig-toggle-btn {
+  display:flex; align-items:center; gap:6px;
+  padding:5px 12px;
+  background:transparent;
+  border:1px solid var(--border2);
+  border-radius:6px;
+  color:var(--muted);
+  font-family:var(--mono);
+  font-size:10px;
+  cursor:pointer;
+  transition:all 0.15s;
+  text-transform:uppercase;
+  white-space:nowrap;
 }
-
-.vb {
-  padding: 5px 12px;
-  background: transparent;
-  border: none;
-  color: var(--muted);
-  font-family: var(--mono);
-  font-size: 10px;
-  cursor: pointer;
-  transition: all 0.12s;
-  text-transform: uppercase;
-}
-.vb + .vb { border-left: 1px solid var(--border2); }
-.vb.on { background: var(--red); color: #fff; }
+.ig-toggle-btn:hover { border-color:var(--ig); color:var(--ig); }
+.ig-toggle-btn.on { background:linear-gradient(135deg,var(--ig2),var(--ig)); border-color:var(--ig); color:#fff; }
+.ig-toggle-btn .ig-dot { width:7px; height:7px; border-radius:50%; background:var(--ig); flex-shrink:0; }
+.ig-toggle-btn.on .ig-dot { background:#fff; }
+.ig-count { background:var(--ig); color:#fff; border-radius:20px; padding:1px 5px; font-size:9px; font-weight:700; }
 
 /* ── LAYOUT ── */
-.layout {
-  flex: 1;
-  display: flex;
-  overflow: hidden;
+.layout { flex:1; display:flex; overflow:hidden; }
+#map { flex:1; height:100%; background:#07091a; }
+
+/* ── INSTAGRAM FEED PANEL (left drawer) ── */
+.ig-panel {
+  width:0;
+  background:var(--surface);
+  border-right:1px solid var(--border);
+  overflow:hidden;
+  transition:width 0.3s cubic-bezier(.4,0,.2,1);
+  display:flex;
+  flex-direction:column;
+  flex-shrink:0;
+  order:-1;
+}
+.ig-panel.open { width:340px; }
+
+.ig-panel-header {
+  padding:12px 16px;
+  border-bottom:1px solid var(--border);
+  flex-shrink:0;
+}
+.ig-panel-title {
+  font-family:var(--syne);
+  font-size:13px;
+  font-weight:700;
+  background:linear-gradient(135deg,var(--ig2),var(--ig));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  margin-bottom:8px;
+}
+.ig-account-pills { display:flex; gap:5px; flex-wrap:wrap; }
+.ig-acc-pill {
+  padding:3px 9px;
+  border-radius:20px;
+  font-family:var(--mono);
+  font-size:9px;
+  cursor:pointer;
+  border:1px solid var(--border2);
+  color:var(--muted);
+  transition:all 0.12s;
+  text-transform:uppercase;
+}
+.ig-acc-pill:hover { border-color:var(--ig); color:var(--ig); }
+.ig-acc-pill.on { background:var(--ig); border-color:var(--ig); color:#fff; }
+.ig-acc-pill[data-acc="all"].on { background:linear-gradient(135deg,var(--ig2),var(--ig)); border-color:var(--ig); }
+
+.ig-search {
+  width:100%;
+  background:var(--card);
+  border:1px solid var(--border2);
+  border-radius:6px;
+  padding:6px 10px;
+  color:var(--text);
+  font-family:var(--body);
+  font-size:11px;
+  outline:none;
+  margin-top:8px;
+}
+.ig-search:focus { border-color:var(--ig); }
+.ig-search::placeholder { color:var(--muted); }
+
+.ig-sort {
+  display:flex;
+  gap:4px;
+  margin-top:8px;
+}
+.ig-sort-btn {
+  padding:3px 8px;
+  background:transparent;
+  border:1px solid var(--border2);
+  border-radius:4px;
+  color:var(--muted);
+  font-family:var(--mono);
+  font-size:9px;
+  cursor:pointer;
+  transition:all 0.12s;
+  text-transform:uppercase;
+}
+.ig-sort-btn.on { background:var(--amber); border-color:var(--amber); color:#000; }
+
+.ig-feed {
+  flex:1;
+  overflow-y:auto;
+  padding:10px 12px;
+}
+.ig-feed::-webkit-scrollbar { width:3px; }
+.ig-feed::-webkit-scrollbar-thumb { background:var(--border2); }
+
+.ig-load-banner {
+  padding:30px 16px;
+  text-align:center;
+  color:var(--muted);
+  font-family:var(--mono);
+  font-size:10px;
+  line-height:2;
+}
+.ig-load-banner a {
+  color:var(--ig);
+  text-decoration:none;
+  border-bottom:1px dashed var(--ig);
+  cursor:pointer;
 }
 
-/* ── MAP ── */
-#map {
-  flex: 1;
-  height: 100%;
-  background: #07091a;
+/* Post card */
+.ig-post {
+  background:var(--card);
+  border:1px solid var(--border2);
+  border-radius:8px;
+  padding:11px;
+  margin-bottom:8px;
+  cursor:pointer;
+  transition:all 0.15s;
+  position:relative;
 }
+.ig-post:hover { border-color:var(--ig); transform:translateY(-1px); }
+.ig-post.highlighted { border-color:var(--ig); box-shadow:0 0 0 2px rgba(225,48,108,0.2); }
+
+.ig-post-head { display:flex; align-items:center; gap:7px; margin-bottom:7px; }
+.ig-avatar {
+  width:26px; height:26px; border-radius:50%;
+  background:linear-gradient(135deg,var(--ig2),var(--ig));
+  display:flex; align-items:center; justify-content:center;
+  font-size:9px; font-weight:700; color:#fff;
+  flex-shrink:0; font-family:var(--mono);
+}
+.ig-post-meta { flex:1; min-width:0; }
+.ig-post-acc { font-family:var(--mono); font-size:9px; color:var(--ig); text-transform:uppercase; letter-spacing:0.5px; }
+.ig-post-date { font-family:var(--mono); font-size:9px; color:var(--muted); }
+
+.ig-type-badge {
+  font-family:var(--mono);
+  font-size:8px;
+  padding:2px 6px;
+  border-radius:10px;
+  font-weight:500;
+  text-transform:uppercase;
+  flex-shrink:0;
+}
+
+.ig-caption {
+  font-size:11px;
+  color:#b0b3cc;
+  line-height:1.55;
+  margin-bottom:8px;
+  display:-webkit-box;
+  -webkit-line-clamp:4;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}
+.ig-post.expanded .ig-caption { -webkit-line-clamp:unset; }
+
+.ig-post-footer { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+.ig-stat { font-family:var(--mono); font-size:9px; color:var(--muted); }
+.ig-stat b { color:var(--text); }
+.ig-loc { font-family:var(--mono); font-size:9px; color:var(--teal); display:flex; align-items:center; gap:3px; }
+.ig-hate-bar { display:flex; align-items:center; gap:4px; margin-top:6px; }
+.ig-hate-label { font-family:var(--mono); font-size:8px; color:var(--muted); text-transform:uppercase; }
+.ig-hate-dots { display:flex; gap:2px; }
+.ig-hate-dot { width:6px; height:6px; border-radius:50%; background:var(--border2); }
+.ig-hate-dot.on { background:var(--red); }
+
+.ig-open-link {
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+  margin-top:6px;
+  color:var(--ig);
+  font-family:var(--mono);
+  font-size:9px;
+  text-decoration:none;
+  text-transform:uppercase;
+  letter-spacing:0.5px;
+  opacity:0;
+  transition:opacity 0.15s;
+}
+.ig-post:hover .ig-open-link { opacity:1; }
+
+.ig-map-pin-btn {
+  margin-left:auto;
+  padding:3px 8px;
+  background:transparent;
+  border:1px solid var(--teal);
+  border-radius:4px;
+  color:var(--teal);
+  font-family:var(--mono);
+  font-size:8px;
+  cursor:pointer;
+  transition:all 0.12s;
+  text-transform:uppercase;
+}
+.ig-map-pin-btn:hover { background:var(--teal); color:#000; }
+.ig-map-pin-btn.no-loc { border-color:var(--border2); color:var(--muted); cursor:default; }
+
+/* No-location indicator */
+.ig-no-loc { color:var(--muted); font-size:9px; font-family:var(--mono); }
+
+/* Stats bar at bottom of panel */
+.ig-stats-bar {
+  padding:8px 12px;
+  border-top:1px solid var(--border);
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  flex-shrink:0;
+}
+.ig-stat-item { font-family:var(--mono); font-size:9px; color:var(--muted); }
+.ig-stat-item b { color:var(--text); }
 
 /* ── CASE PANEL (right drawer) ── */
 .case-panel {
-  width: 0;
-  background: var(--surface);
-  border-left: 1px solid var(--border);
-  overflow: hidden;
-  transition: width 0.3s cubic-bezier(.4,0,.2,1);
-  display: flex;
-  flex-direction: column;
-  flex-shrink: 0;
+  width:0; background:var(--surface);
+  border-left:1px solid var(--border);
+  overflow:hidden;
+  transition:width 0.3s cubic-bezier(.4,0,.2,1);
+  display:flex; flex-direction:column; flex-shrink:0;
 }
-
-.case-panel.open {
-  width: 420px;
-}
+.case-panel.open { width:420px; }
 
 .panel-close {
-  position: absolute;
-  top: 60px;
-  right: 426px;
-  width: 28px;
-  height: 28px;
-  background: var(--surface);
-  border: 1px solid var(--border2);
-  border-radius: 50%;
-  cursor: pointer;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
-  color: var(--muted);
-  z-index: 2000;
-  transition: all 0.15s;
+  position:absolute; top:60px; right:426px;
+  width:28px; height:28px;
+  background:var(--surface); border:1px solid var(--border2);
+  border-radius:50%; cursor:pointer;
+  display:none; align-items:center; justify-content:center;
+  font-size:12px; color:var(--muted); z-index:2000;
+  transition:all 0.15s;
 }
-.panel-close:hover { background: var(--red); color: white; border-color: var(--red); }
-.panel-close.show { display: flex; }
+.panel-close:hover { background:var(--red); color:white; border-color:var(--red); }
+.panel-close.show { display:flex; }
 
-.case-scroll {
-  flex: 1;
-  overflow-y: auto;
-  padding: 20px;
-}
+.case-scroll { flex:1; overflow-y:auto; padding:20px; }
+.case-scroll::-webkit-scrollbar { width:3px; }
+.case-scroll::-webkit-scrollbar-thumb { background:var(--border2); }
 
-.case-scroll::-webkit-scrollbar { width: 3px; }
-.case-scroll::-webkit-scrollbar-thumb { background: var(--border2); }
-
-/* Case header */
-.case-type-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-family: var(--mono);
-  font-size: 10px;
-  font-weight: 500;
-  margin-bottom: 12px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.case-title {
-  font-family: var(--syne);
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 1.3;
-  margin-bottom: 8px;
-}
-
-.case-meta-row {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-bottom: 16px;
-}
-
-.meta-chip {
-  background: var(--card);
-  border: 1px solid var(--border2);
-  padding: 3px 10px;
-  border-radius: 4px;
-  font-family: var(--mono);
-  font-size: 10px;
-  color: var(--muted);
-}
-
-.meta-chip b { color: var(--text); }
-
-.case-divider {
-  height: 1px;
-  background: var(--border);
-  margin: 14px 0;
-}
-
-.case-section-title {
-  font-family: var(--mono);
-  font-size: 9px;
-  color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  margin-bottom: 8px;
-}
-
-.case-desc {
-  font-size: 13px;
-  line-height: 1.7;
-  color: #b0b3cc;
-  margin-bottom: 14px;
-}
-
-/* Timeline */
-.timeline {
-  position: relative;
-  padding-left: 20px;
-  margin-bottom: 14px;
-}
-
-.timeline::before {
-  content: '';
-  position: absolute;
-  left: 5px;
-  top: 6px;
-  bottom: 6px;
-  width: 1px;
-  background: var(--border2);
-}
-
-.tl-item {
-  position: relative;
-  margin-bottom: 10px;
-}
-
-.tl-item::before {
-  content: '';
-  position: absolute;
-  left: -16px;
-  top: 5px;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--border2);
-  border: 1px solid var(--border2);
-}
-
-.tl-item.key::before { background: var(--red); border-color: var(--red); }
-
-.tl-date {
-  font-family: var(--mono);
-  font-size: 9px;
-  color: var(--muted);
-  margin-bottom: 1px;
-}
-
-.tl-text {
-  font-size: 12px;
-  color: var(--text);
-  line-height: 1.4;
-}
-
-/* Related articles */
-.article-card {
-  background: var(--card);
-  border: 1px solid var(--border2);
-  border-radius: 6px;
-  padding: 11px 13px;
-  margin-bottom: 8px;
-  cursor: pointer;
-  transition: all 0.15s;
-  text-decoration: none;
-  display: block;
-}
-
-.article-card:hover {
-  border-color: var(--amber);
-  background: rgba(245,159,0,0.05);
-}
-
-.article-source {
-  font-family: var(--mono);
-  font-size: 9px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 4px;
-}
-
-.article-title {
-  font-size: 12px;
-  color: var(--text);
-  line-height: 1.4;
-  font-weight: 500;
-}
-
-.article-date {
-  font-family: var(--mono);
-  font-size: 9px;
-  color: var(--muted);
-  margin-top: 4px;
-}
-
-.article-card .ext-icon {
-  float: right;
-  font-size: 10px;
-  color: var(--muted);
-  margin-top: 2px;
-}
-
-/* Related cases */
-.related-case {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 10px;
-  background: var(--card);
-  border: 1px solid var(--border2);
-  border-radius: 6px;
-  margin-bottom: 6px;
-  cursor: pointer;
-  transition: all 0.15s;
-}
-
-.related-case:hover { border-color: var(--blue); }
-
-.rc-dot {
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-.rc-title {
-  font-size: 11px;
-  color: var(--text);
-  flex: 1;
-  line-height: 1.3;
-}
-
-.rc-year {
-  font-family: var(--mono);
-  font-size: 9px;
-  color: var(--muted);
-}
-
-/* Victim/accused info */
-.info-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-  margin-bottom: 14px;
-}
-
-.info-box {
-  background: var(--card);
-  border: 1px solid var(--border2);
-  border-radius: 6px;
-  padding: 10px;
-}
-
-.info-box-label {
-  font-family: var(--mono);
-  font-size: 9px;
-  color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 4px;
-}
-
-.info-box-val {
-  font-size: 12px;
-  color: var(--text);
-  line-height: 1.4;
-}
-
-/* Outcome badge */
-.outcome-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  border-radius: 4px;
-  font-size: 12px;
-  margin-bottom: 14px;
-}
-
-/* Search bar */
-.search-bar {
-  padding: 10px 20px;
-  border-bottom: 1px solid var(--border);
-  flex-shrink: 0;
-}
-
-.search-input {
-  width: 100%;
-  background: var(--card);
-  border: 1px solid var(--border2);
-  border-radius: 6px;
-  padding: 7px 12px;
-  color: var(--text);
-  font-family: var(--body);
-  font-size: 12px;
-  outline: none;
-}
-
-.search-input:focus { border-color: var(--amber); }
-.search-input::placeholder { color: var(--muted); }
+/* Case styling (unchanged from original) */
+.case-type-tag { display:inline-flex; align-items:center; gap:6px; padding:4px 12px; border-radius:20px; font-family:var(--mono); font-size:10px; font-weight:500; margin-bottom:12px; text-transform:uppercase; letter-spacing:1px; }
+.case-title { font-family:var(--syne); font-size:18px; font-weight:700; line-height:1.3; margin-bottom:8px; }
+.case-meta-row { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:16px; }
+.meta-chip { background:var(--card); border:1px solid var(--border2); padding:3px 10px; border-radius:4px; font-family:var(--mono); font-size:10px; color:var(--muted); }
+.meta-chip b { color:var(--text); }
+.case-divider { height:1px; background:var(--border); margin:14px 0; }
+.case-section-title { font-family:var(--mono); font-size:9px; color:var(--muted); text-transform:uppercase; letter-spacing:2px; margin-bottom:8px; }
+.case-desc { font-size:13px; line-height:1.7; color:#b0b3cc; margin-bottom:14px; }
+.timeline { position:relative; padding-left:20px; margin-bottom:14px; }
+.timeline::before { content:''; position:absolute; left:5px; top:6px; bottom:6px; width:1px; background:var(--border2); }
+.tl-item { position:relative; margin-bottom:10px; }
+.tl-item::before { content:''; position:absolute; left:-16px; top:5px; width:7px; height:7px; border-radius:50%; background:var(--border2); border:1px solid var(--border2); }
+.tl-item.key::before { background:var(--red); border-color:var(--red); }
+.tl-date { font-family:var(--mono); font-size:9px; color:var(--muted); margin-bottom:1px; }
+.tl-text { font-size:12px; color:var(--text); line-height:1.4; }
+.article-card { background:var(--card); border:1px solid var(--border2); border-radius:6px; padding:11px 13px; margin-bottom:8px; cursor:pointer; transition:all 0.15s; text-decoration:none; display:block; }
+.article-card:hover { border-color:var(--amber); background:rgba(245,159,0,0.05); }
+.article-source { font-family:var(--mono); font-size:9px; text-transform:uppercase; letter-spacing:1px; margin-bottom:4px; }
+.article-title { font-size:12px; color:var(--text); line-height:1.4; font-weight:500; }
+.article-date { font-family:var(--mono); font-size:9px; color:var(--muted); margin-top:4px; }
+.article-card .ext-icon { float:right; font-size:10px; color:var(--muted); margin-top:2px; }
+.related-case { display:flex; align-items:center; gap:10px; padding:8px 10px; background:var(--card); border:1px solid var(--border2); border-radius:6px; margin-bottom:6px; cursor:pointer; transition:all 0.15s; }
+.related-case:hover { border-color:var(--blue); }
+.rc-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+.rc-title { font-size:11px; color:var(--text); flex:1; line-height:1.3; }
+.rc-year { font-family:var(--mono); font-size:9px; color:var(--muted); }
+.info-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:14px; }
+.info-box { background:var(--card); border:1px solid var(--border2); border-radius:6px; padding:10px; }
+.info-box-label { font-family:var(--mono); font-size:9px; color:var(--muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:4px; }
+.info-box-val { font-size:12px; color:var(--text); line-height:1.4; }
+.outcome-badge { display:inline-flex; align-items:center; gap:6px; padding:6px 12px; border-radius:4px; font-size:12px; margin-bottom:14px; }
+.search-bar { padding:10px 20px; border-bottom:1px solid var(--border); flex-shrink:0; }
+.search-input { width:100%; background:var(--card); border:1px solid var(--border2); border-radius:6px; padding:7px 12px; color:var(--text); font-family:var(--body); font-size:12px; outline:none; }
+.search-input:focus { border-color:var(--amber); }
+.search-input::placeholder { color:var(--muted); }
 
 /* Map legend */
 .map-legend {
-  position: absolute;
-  bottom: 28px;
-  left: 12px;
-  background: rgba(5,6,14,0.92);
-  border: 1px solid var(--border2);
-  padding: 10px 14px;
-  border-radius: 6px;
-  z-index: 1000;
-  font-family: var(--mono);
-  font-size: 10px;
+  position:absolute; bottom:28px; left:12px;
+  background:rgba(5,6,14,0.92);
+  border:1px solid var(--border2);
+  padding:10px 14px; border-radius:6px;
+  z-index:1000; font-family:var(--mono); font-size:10px;
 }
+.leg-row { display:flex; align-items:center; gap:7px; margin-bottom:5px; color:var(--text); }
+.leg-dot { width:9px; height:9px; border-radius:50%; flex-shrink:0; }
 
-.leg-row {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  margin-bottom: 5px;
-  color: var(--text);
-}
-
-.leg-dot {
-  width: 9px; height: 9px;
+/* Instagram markers on map */
+.ig-marker-dot {
+  background: linear-gradient(135deg, #833ab4, #e1306c);
   border-radius: 50%;
-  flex-shrink: 0;
+  border: 2px solid rgba(255,255,255,0.5);
+  box-shadow: 0 0 10px rgba(225,48,108,0.6);
 }
 
-/* Hover tooltip override */
-.leaflet-tooltip {
-  background: rgba(5,6,14,0.95) !important;
-  border: 1px solid var(--border2) !important;
-  color: var(--text) !important;
-  font-family: var(--mono) !important;
-  font-size: 11px !important;
-  padding: 7px 11px !important;
-  border-radius: 4px !important;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.6) !important;
-  max-width: 200px !important;
-}
+/* Tooltip */
+.leaflet-tooltip { background:rgba(5,6,14,0.95)!important; border:1px solid var(--border2)!important; color:var(--text)!important; font-family:var(--mono)!important; font-size:11px!important; padding:7px 11px!important; border-radius:4px!important; box-shadow:0 4px 20px rgba(0,0,0,0.6)!important; max-width:220px!important; }
+.leaflet-tooltip::before { display:none!important; }
 
-.leaflet-tooltip::before { display: none !important; }
-
-/* Pulse animation for selected marker */
-@keyframes markerPulse {
-  0% { transform: scale(1); opacity:1; }
-  50% { transform: scale(1.6); opacity:0.4; }
-  100% { transform: scale(1); opacity:1; }
-}
-
-.pulse { animation: markerPulse 1.5s infinite; }
-
-/* Loading overlay */
-#loading {
-  position: fixed;
-  inset: 0;
-  background: var(--bg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 16px;
-  z-index: 9999;
-  transition: opacity 0.4s;
-}
-
-.load-spinner {
-  width: 32px; height: 32px;
-  border: 2px solid var(--border2);
-  border-top-color: var(--red);
-  border-radius: 50%;
-  animation: spin 0.7s linear infinite;
-}
-
-@keyframes spin { to { transform: rotate(360deg); } }
-
-.load-text {
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: 2px;
-}
+/* Loading */
+#loading { position:fixed; inset:0; background:var(--bg); display:flex; align-items:center; justify-content:center; flex-direction:column; gap:16px; z-index:9999; transition:opacity 0.4s; }
+.load-spinner { width:32px; height:32px; border:2px solid var(--border2); border-top-color:var(--red); border-radius:50%; animation:spin 0.7s linear infinite; }
+@keyframes spin { to { transform:rotate(360deg); } }
+.load-text { font-family:var(--mono); font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:2px; }
+@keyframes markerPulse { 0%{transform:scale(1);opacity:1} 50%{transform:scale(1.6);opacity:0.4} 100%{transform:scale(1);opacity:1} }
+.pulse { animation:markerPulse 1.5s infinite; }
 </style>
 </head>
 <body>
@@ -571,22 +425,75 @@ body {
     <div class="stat-pill">Incidents: <b id="s-count">0</b></div>
     <div class="stat-pill">Deaths: <b id="s-deaths" style="color:var(--red)">0</b></div>
     <div class="stat-pill">States: <b id="s-states" style="color:var(--teal)">0</b></div>
+
+    <!-- Instagram Feed Toggle -->
+    <button class="ig-toggle-btn" id="ig-toggle" onclick="toggleIgPanel()">
+      <div class="ig-dot"></div>
+      📷 Feed <span class="ig-count" id="ig-count">0</span>
+    </button>
+
     <div class="view-btns">
-      <button class="vb on" id="vb-pins"   onclick="setView('pins')">Pins</button>
-      <button class="vb"    id="vb-heat"   onclick="setView('heat')">Heat</button>
-      <button class="vb"    id="vb-cluster"onclick="setView('cluster')">Cluster</button>
+      <button class="vb on" id="vb-pins"    onclick="setView('pins')">Pins</button>
+      <button class="vb"    id="vb-heat"    onclick="setView('heat')">Heat</button>
+      <button class="vb"    id="vb-cluster" onclick="setView('cluster')">Cluster</button>
     </div>
   </div>
 </div>
 
 <!-- MAIN LAYOUT -->
 <div class="layout">
+
+  <!-- INSTAGRAM FEED PANEL (left) -->
+  <div class="ig-panel" id="ig-panel">
+
+    <div class="ig-panel-header">
+      <div class="ig-panel-title">📷 Instagram Intelligence Feed</div>
+
+      <div class="ig-account-pills">
+        <span class="ig-acc-pill on" data-acc="all" onclick="setIgAccount('all',this)">All</span>
+        <span class="ig-acc-pill" data-acc="theobserverpost" onclick="setIgAccount('theobserverpost',this)">@theobserverpost</span>
+        <span class="ig-acc-pill" data-acc="hindutvawatch"   onclick="setIgAccount('hindutvawatch',this)">@hindutvawatch</span>
+        <span class="ig-acc-pill" data-acc="foejmedia"       onclick="setIgAccount('foejmedia',this)">@foejmedia</span>
+      </div>
+
+      <input class="ig-search" placeholder="🔍 Search posts, keywords..." oninput="igSearch(this.value)" />
+
+      <div class="ig-sort">
+        <span style="font-family:var(--mono);font-size:9px;color:var(--muted);align-self:center;margin-right:2px">Sort:</span>
+        <button class="ig-sort-btn on" onclick="setIgSort('date',this)">Newest</button>
+        <button class="ig-sort-btn" onclick="setIgSort('likes',this)">Likes</button>
+        <button class="ig-sort-btn" onclick="setIgSort('hate',this)">Hate Score</button>
+        <button class="ig-sort-btn" onclick="setIgSort('urgency',this)">Urgent</button>
+      </div>
+    </div>
+
+    <div class="ig-feed" id="ig-feed">
+      <div class="ig-load-banner" id="ig-load-banner">
+        <div style="font-size:28px;margin-bottom:10px">📷</div>
+        <div style="color:var(--text);font-size:12px;margin-bottom:8px">No Instagram data loaded</div>
+        <div>Run <code style="background:var(--card);padding:2px 6px;border-radius:3px;color:var(--amber)">scraper.py</code> to generate<br><code style="background:var(--card);padding:2px 6px;border-radius:3px;color:var(--amber)">scraped_data.json</code><br><br>
+        Then <a onclick="document.getElementById('ig-file-input').click()">click here to load it</a><br>or drag & drop the file anywhere.
+        </div>
+        <input type="file" id="ig-file-input" accept=".json" style="display:none" onchange="loadIgFile(this)"/>
+        <br>
+        <button onclick="loadDemoData()" style="margin-top:8px;padding:5px 14px;background:var(--card);border:1px solid var(--ig);color:var(--ig);border-radius:4px;font-family:var(--mono);font-size:9px;cursor:pointer;text-transform:uppercase">Load Demo Data</button>
+      </div>
+    </div>
+
+    <div class="ig-stats-bar" id="ig-stats-bar" style="display:none">
+      <div class="ig-stat-item">Posts: <b id="ig-s-total">0</b></div>
+      <div class="ig-stat-item">Geo-tagged: <b id="ig-s-geo" style="color:var(--teal)">0</b></div>
+      <div class="ig-stat-item">High urgency: <b id="ig-s-urgent" style="color:var(--red)">0</b></div>
+      <div class="ig-stat-item">Showing: <b id="ig-s-showing">0</b></div>
+    </div>
+  </div>
+
   <div id="map"></div>
 
   <!-- Close button -->
   <div class="panel-close" id="panel-close" onclick="closePanel()">✕</div>
 
-  <!-- CASE DETAIL PANEL -->
+  <!-- CASE DETAIL PANEL (right) -->
   <div class="case-panel" id="case-panel">
     <div class="search-bar">
       <input class="search-input" placeholder="🔍  Search cases, locations, keywords..." oninput="searchCases(this.value)" id="search-input"/>
@@ -608,419 +515,34 @@ body {
   <div class="leg-row"><div class="leg-dot" style="background:#9775fa"></div>Communal Riot</div>
   <div class="leg-row"><div class="leg-dot" style="background:#f783ac"></div>Hate Speech</div>
   <div class="leg-row"><div class="leg-dot" style="background:#4dabf7"></div>Threats/Coercion</div>
+  <div class="leg-row"><div class="leg-dot" style="background:linear-gradient(135deg,#833ab4,#e1306c)"></div>Instagram Post</div>
 </div>
 
 <script>
-// ============================================================
-// INCIDENT DATABASE — with full details, timeline, articles
-// ============================================================
+// ══════════════════════════════════════════════════════════════
+// INCIDENT DATABASE
+// ══════════════════════════════════════════════════════════════
 const INCIDENTS = [
-{
-  id:1, title:"Pehlu Khan Lynching — Alwar",
-  state:"Rajasthan", district:"Alwar", lat:27.56, lng:76.60,
-  year:2017, date:"2017-04-01",
-  type:"Mob Lynching", deaths:1, injured:2,
-  trigger:"Returning from cattle fair with cows",
-  description:"Pehlu Khan, a 55-year-old dairy farmer from Haryana, was attacked by a mob of 200 people on National Highway 8 near Behror in Alwar district. He had documentation proving legal purchase of cows at a livestock fair. He died two days later from injuries. His sons were also beaten. Police initially filed a case against Pehlu Khan and his sons under the Rajasthan Bovine Animal (Prohibition of Slaughter and Regulation of Temporary Migration or Export) Act — effectively treating the victims as accused.",
-  outcome:"acquitted_accused",
-  outcome_text:"All 6 accused acquitted by Alwar sessions court in 2019. Police had filed case against victims too.",
-  timeline:[
-    {date:"1 Apr 2017", text:"Mob attacks Pehlu Khan on NH-8 near Behror", key:true},
-    {date:"3 Apr 2017", text:"Pehlu Khan dies of injuries at hospital", key:true},
-    {date:"5 Apr 2017", text:"FIR filed — shockingly, also names Pehlu Khan's sons as accused"},
-    {date:"Aug 2019", text:"Sessions court acquits all 6 accused citing weak evidence", key:true},
-    {date:"2020", text:"Rajasthan HC takes up case on suo motu; CBI probe ordered"},
-    {date:"2023", text:"Case still pending in higher courts"},
-  ],
-  victims:["Pehlu Khan, 55, dairy farmer"],
-  accused:["Vipin Yadav", "Ravindra Kumar", "Jetpal", "Kaluram", "Yogesh Kumar", "Bhim Rathi (6 total)"],
-  articles:[
-    {source:"The Wire", title:"Pehlu Khan Case: How the System Failed a Lynching Victim", url:"https://thewire.in/communalism/pehlu-khan-acquittal-alwar-lynching", date:"Aug 2019", color:"#4dabf7"},
-    {source:"The Hindu", title:"All six accused in Pehlu Khan lynching case acquitted", url:"https://www.thehindu.com/news/national/all-six-accused-in-pehlu-khan-lynching-case-acquitted/article29191610.ece", date:"14 Aug 2019", color:"#20c997"},
-    {source:"Human Rights Watch", title:"Violent Cow Protection in India", url:"https://www.hrw.org/report/2019/02/18/violent-cow-protection-india/vigilante-groups-attack-minorities", date:"Feb 2019", color:"#f59f00"},
-    {source:"NDTV", title:"Pehlu Khan Death: A Detailed Timeline", url:"https://www.ndtv.com/india-news/pehlu-khan-death-timeline-of-events", date:"2019", color:"#f783ac"},
-    {source:"FactChecker.in", title:"Cattle-related hate crimes database entry", url:"https://factchecker.in/the-facts/", date:"2017", color:"#9775fa"},
-  ],
-  related:[3,11,13,9,14],
-  tags:["cow vigilantism","Rajasthan","dairy farmer","acquittal","highway lynching"],
-},
-{
-  id:2, title:"Mohammad Akhlaq Lynching — Dadri",
-  state:"Uttar Pradesh", district:"Greater Noida", lat:28.50, lng:77.53,
-  year:2015, date:"2015-09-28",
-  type:"Mob Lynching", deaths:1, injured:1,
-  trigger:"False rumour of beef storage spread via mosque loudspeaker",
-  description:"Mohammad Akhlaq, 52, was dragged out of his home in Bisara village by a mob of 100-200 people after an announcement from the local temple that his family had stored beef. The meat was later tested and found to be mutton. His son Danish was critically injured. This case became a major national flashpoint and sparked the 'Award Wapsi' (return of awards) protest movement by writers and intellectuals.",
-  outcome:"acquitted_accused",
-  outcome_text:"Key accused Vishal Rana died in 2018. Charges against remaining accused weakened after UP Police filed closure report.",
-  timeline:[
-    {date:"28 Sep 2015", text:"Mosque announcement triggers mob; Akhlaq dragged out and beaten to death", key:true},
-    {date:"29 Sep 2015", text:"Meat recovered from home sent for testing"},
-    {date:"Oct 2015", text:"Test confirms meat is mutton, not beef"},
-    {date:"Oct 2015", text:"'Award Wapsi' movement begins nationally", key:true},
-    {date:"2018", text:"Key accused Vishal Rana dies; other accused walk free on bail"},
-    {date:"2020", text:"UP Police files closure report; family moves HC"},
-  ],
-  victims:["Mohammad Akhlaq, 52", "Danish (son), critically injured"],
-  accused:["Vishal Rana (deceased)", "16 others arrested initially"],
-  articles:[
-    {source:"BBC", title:"India Dadri beef lynching: Mohammad Akhlaq death probe", url:"https://www.bbc.com/news/world-asia-india-34493754", date:"Oct 2015", color:"#f03e3e"},
-    {source:"The Guardian", title:"Indian man lynched by mob over beef rumours", url:"https://www.theguardian.com/world/2015/sep/29/indian-man-lynched-by-mob-over-beef-rumours-in-uttar-pradesh", date:"29 Sep 2015", color:"#4dabf7"},
-    {source:"Scroll.in", title:"Dadri Lynching: The complete story", url:"https://scroll.in/article/757939/dadri-lynching", date:"2015", color:"#20c997"},
-    {source:"IndiaSpend", title:"Cow-related violence data", url:"https://indiaspend.com", date:"2017", color:"#f59f00"},
-  ],
-  related:[1,3,8,10,4],
-  tags:["cow vigilantism","UP","fake rumour","Award Wapsi","Dadri","beef"],
-},
-{
-  id:3, title:"Junaid Khan Stabbing — Ballabhgarh Train",
-  state:"Haryana", district:"Faridabad", lat:28.34, lng:77.32,
-  year:2017, date:"2017-06-22",
-  type:"Mob Lynching", deaths:1, injured:2,
-  trigger:"Argument over train seat escalated with anti-Muslim slurs, beef accusations",
-  description:"16-year-old Junaid Khan was stabbed to death on a crowded Delhi–Mathura train near Ballabhgarh station in Haryana. He and his brothers were returning home after Eid shopping. A fight over train seats escalated when attackers called them beef-eaters and 'anti-nationals' and removed their skull caps. Junaid was thrown off the train after being stabbed. Hundreds of passengers witnessed the attack. The case triggered the #NotInMyName protest.",
-  outcome:"convicted",
-  outcome_text:"Naresh, the main accused, convicted for murder by Faridabad sessions court in 2018. Sentenced to life imprisonment.",
-  timeline:[
-    {date:"22 Jun 2017", text:"Junaid and brothers board Delhi-Mathura train after Eid shopping", key:true},
-    {date:"22 Jun 2017", text:"Argument over seats; attackers use anti-Muslim slurs and remove skull caps"},
-    {date:"22 Jun 2017", text:"Junaid stabbed and thrown from moving train near Ballabhgarh", key:true},
-    {date:"Jun 2017", text:"#NotInMyName protests erupt across India"},
-    {date:"2018", text:"Naresh convicted and sentenced to life imprisonment", key:true},
-  ],
-  victims:["Junaid Khan, 16, student"],
-  accused:["Naresh (main accused, convicted)", "Shri Bhagwan", "others"],
-  articles:[
-    {source:"The Wire", title:"Junaid's Killing: What We Know, What We Don't", url:"https://thewire.in/communalism/junaid-killing-train-haryana", date:"Jun 2017", color:"#4dabf7"},
-    {source:"The Hindu", title:"Junaid murder: Man convicted, gets life term", url:"https://www.thehindu.com/news/national/junaid-murder-case-man-convicted-sentenced-to-life-imprisonment/article24985892.ece", date:"2018", color:"#20c997"},
-    {source:"Al Jazeera", title:"India train stabbing: Muslim teen killed", url:"https://www.aljazeera.com/news/2017/6/23/india-train-stabbing-muslim-teen-killed-amid-beef-vigilantism", date:"Jun 2017", color:"#f59f00"},
-    {source:"Scroll.in", title:"NotInMyName protests over Junaid's killing", url:"https://scroll.in/article/841900/notinmyname-protests", date:"Jun 2017", color:"#f783ac"},
-  ],
-  related:[1,2,7,4],
-  tags:["train attack","Haryana","Eid","skull cap","beef accusation","NotInMyName"],
-},
-{
-  id:4, title:"Tabrez Ansari Lynching — Seraikela",
-  state:"Jharkhand", district:"Seraikela", lat:22.59, lng:85.93,
-  year:2019, date:"2019-06-17",
-  type:"Mob Lynching", deaths:1, injured:0,
-  trigger:"Alleged motorcycle theft; mob forced him to chant 'Jai Shri Ram'",
-  description:"24-year-old Tabrez Ansari was tied to a pole in Seraikela Kharsawan district of Jharkhand and beaten by a mob for nearly 12 hours. The mob forced him to chant 'Jai Shri Ram' and 'Jai Hanuman' while beating him. Police arrived and took him to custody — but instead of getting him medical treatment, kept him in jail for four days despite his critical injuries. He died on June 22 in hospital. His widow, Shaista Parveen, has continued to fight for justice.",
-  outcome:"partial_justice",
-  outcome_text:"11 accused arrested. Jharkhand HC upgraded charges to murder. Several accused out on bail.",
-  timeline:[
-    {date:"17 Jun 2019", text:"Tabrez tied to pole, beaten for 12 hours, forced to chant Jai Shri Ram", key:true},
-    {date:"17 Jun 2019", text:"Police take him to custody but deny medical treatment for 4 days"},
-    {date:"22 Jun 2019", text:"Tabrez dies in hospital from injuries", key:true},
-    {date:"Jun 2019", text:"Video of beating goes viral; national outrage"},
-    {date:"2019", text:"Jharkhand HC directs upgrade of charges from culpable homicide to murder"},
-    {date:"2020-23", text:"Multiple accused out on bail; widow Shaista continues fight"},
-  ],
-  victims:["Tabrez Ansari, 24"],
-  accused:["11 people arrested; Pappu Mandal identified as key attacker"],
-  articles:[
-    {source:"The Wire", title:"Jharkhand Lynching: Tabrez Ansari Died Because Police Failed", url:"https://thewire.in/communalism/jharkhand-tabrez-ansari-lynching-police", date:"2019", color:"#f03e3e"},
-    {source:"BBC Hindi", title:"तबरेज़ अंसारी की मौत: 12 घंटे जय श्रीराम बोलता रहा", url:"https://www.bbc.com/hindi/india-48696099", date:"Jun 2019", color:"#4dabf7"},
-    {source:"Al Jazeera", title:"India lynching: Tabrez Ansari forced to chant Hindu slogans", url:"https://www.aljazeera.com/news/2019/6/23/india-muslims-outrage-tabrez-ansari-lynch-mob", date:"Jun 2019", color:"#f59f00"},
-    {source:"HRW", title:"India: Investigate Mob Killing in Jharkhand", url:"https://www.hrw.org/news/2019/06/24/india-investigate-mob-killing-jharkhand", date:"Jun 2019", color:"#9775fa"},
-  ],
-  related:[1,5,8,6],
-  tags:["Jharkhand","forced chanting","Jai Shri Ram","police failure","custody death"],
-},
-{
-  id:5, title:"Delhi Riots — Northeast Delhi",
-  state:"Delhi", district:"Northeast Delhi", lat:28.68, lng:77.29,
-  year:2020, date:"2020-02-23",
-  type:"Communal Riot", deaths:53, injured:200,
-  trigger:"CAA protests; counter-mobilisation by BJP leaders",
-  description:"The worst communal violence in Delhi since the 1984 anti-Sikh riots. Over 3 days (Feb 23-26, 2020), mobs attacked Muslim-majority areas in Northeast Delhi. 53 people were killed, over 200 injured, hundreds of homes and shops burned, mosques vandalized. The violence began shortly after BJP leader Kapil Mishra gave an ultimatum to police to clear CAA protesters or face mob action. HRW and Amnesty documented systematic targeting of Muslims.",
-  outcome:"ongoing",
-  outcome_text:"1,900+ people arrested. Most arrested are Muslim. Activists and students charged under UAPA. Main instigators not charged.",
-  timeline:[
-    {date:"23 Feb 2020", text:"BJP leader gives ultimatum to police; mobs mobilise", key:true},
-    {date:"23-26 Feb", text:"53 killed, 200+ injured; mosques, homes, schools burned", key:true},
-    {date:"Mar 2020", text:"Delhi Police arrests begin — majority Muslim"},
-    {date:"2020-21", text:"UAPA charges against student activists, journalists"},
-    {date:"2022", text:"Trial court: Over 1,900 chargesheets filed"},
-    {date:"2024", text:"Most key Hindu nationalist accused out on bail; Muslim accused in jail"},
-  ],
-  victims:["53 killed, majority Muslim", "200+ injured"],
-  accused:["1900+ arrested; majority Muslim. BJP leaders not charged."],
-  articles:[
-    {source:"Human Rights Watch", title:"India: Delhi Police Implicated in Communal Violence", url:"https://www.hrw.org/news/2020/04/09/india-delhi-police-implicated-communal-violence", date:"Apr 2020", color:"#f03e3e"},
-    {source:"The Wire", title:"Delhi Riots: Complete Documented Account", url:"https://thewire.in/communalism/delhi-riots-2020-documentation", date:"2020", color:"#4dabf7"},
-    {source:"Amnesty International", title:"Delhi Riots: One Year On", url:"https://www.amnesty.org/en/latest/news/2021/02/india-one-year-on-victims-of-delhi-violence-still-await-justice/", date:"Feb 2021", color:"#20c997"},
-    {source:"BBC", title:"Delhi riots: The three days of violence that killed 53", url:"https://www.bbc.com/news/world-asia-india-51658504", date:"Feb 2020", color:"#f59f00"},
-    {source:"The Guardian", title:"Delhi riots inquiry blames police for communal violence", url:"https://www.theguardian.com/world/2020/jul/16/delhi-riots-report-blames-police-for-communal-violence", date:"2020", color:"#9775fa"},
-  ],
-  related:[12,15,16,17],
-  tags:["CAA","Delhi","riots","UAPA","Kapil Mishra","Northeast Delhi","2020"],
-},
-{
-  id:6, title:"Nuh Violence — Haryana",
-  state:"Haryana", district:"Nuh", lat:28.10, lng:77.01,
-  year:2023, date:"2023-07-31",
-  type:"Communal Riot", deaths:6, injured:90,
-  trigger:"VHP Brij Mandal Jalabhishek Yatra through Muslim-majority Mewat",
-  description:"Violence broke out when a VHP (Vishwa Hindu Parishad) religious procession attempted to pass through Nuh district, a Muslim-majority area. 6 people died including 2 home guards. 90+ were injured. Following the riots, Haryana government deployed bulldozers to demolish Muslim homes and businesses in Nuh and nearby Gurugram, in what critics called collective punishment. 200+ people arrested, majority Muslim.",
-  outcome:"ongoing",
-  outcome_text:"Bulldozer demolitions condemned by SC. 200+ arrested, predominantly Muslim. VHP leaders not arrested.",
-  timeline:[
-    {date:"31 Jul 2023", text:"VHP yatra procession triggers violence in Nuh", key:true},
-    {date:"31 Jul - 1 Aug", text:"6 killed, 90+ injured; mosques attacked"},
-    {date:"2 Aug 2023", text:"Bulldozers demolish Muslim shops and homes in Nuh and Gurugram", key:true},
-    {date:"Aug 2023", text:"SC takes note of demolitions; orders stay in some cases"},
-    {date:"Aug-Sep 2023", text:"200+ arrested, predominantly Muslim"},
-    {date:"2024", text:"Case ongoing; relief denied to many displaced families"},
-  ],
-  victims:["6 killed", "90+ injured", "hundreds displaced by bulldozer action"],
-  accused:["200+ arrested, majority Muslim. VHP leaders not charged."],
-  articles:[
-    {source:"Human Rights Watch", title:"India: Stop Demolitions as Collective Punishment", url:"https://www.hrw.org/news/2023/08/09/india-stop-demolitions-collective-punishment", date:"Aug 2023", color:"#f03e3e"},
-    {source:"The Wire", title:"Nuh Violence: A Detailed Ground Report", url:"https://thewire.in/communalism/nuh-mewat-violence-vhp-yatra", date:"Aug 2023", color:"#4dabf7"},
-    {source:"Al Jazeera", title:"India's bulldozer justice: Homes demolished after Nuh violence", url:"https://www.aljazeera.com/news/2023/8/2/indias-bulldozer-justice", date:"Aug 2023", color:"#20c997"},
-    {source:"Scroll.in", title:"How Nuh Violence Unfolded", url:"https://scroll.in/article/1053720/nuh-mewat-violence", date:"2023", color:"#f59f00"},
-  ],
-  related:[5,12,15,18],
-  tags:["Nuh","Mewat","VHP","bulldozer","Haryana","2023","collective punishment"],
-},
-{
-  id:7, title:"Alimuddin Ansari Lynching — Ramgarh",
-  state:"Jharkhand", district:"Ramgarh", lat:23.64, lng:85.51,
-  year:2017, date:"2017-06-29",
-  type:"Mob Lynching", deaths:1, injured:0,
-  trigger:"Alleged beef transport; set upon by Bajrang Dal members",
-  description:"Alimuddin Ansari, a 35-year-old meat trader, was lynched by a mob led by Bajrang Dal members in Ramgarh district, Jharkhand. His vehicle was stopped, he was beaten for hours while police reportedly watched, and his van was set on fire. The incident was recorded on video. In 2018, Union minister Jayant Sinha garlanded 8 of the convicted accused when they were released on bail, triggering national outrage.",
-  outcome:"convicted",
-  outcome_text:"11 convicted by fast-track court. Union Minister Jayant Sinha garlanded accused on bail release — massive controversy.",
-  timeline:[
-    {date:"29 Jun 2017", text:"Alimuddin stopped by mob; beaten for hours; van set on fire", key:true},
-    {date:"2018", text:"Fast-track court convicts 11 accused", key:true},
-    {date:"Jul 2018", text:"Union Minister Jayant Sinha garlands convicted accused out on bail", key:true},
-    {date:"2019", text:"Jharkhand HC upholds convictions"},
-    {date:"2023", text:"Case on appeal in Supreme Court"},
-  ],
-  victims:["Alimuddin Ansari, 35, meat trader"],
-  accused:["11 convicted; Bajrang Dal members"],
-  articles:[
-    {source:"The Wire", title:"Jayant Sinha's Garland: Minister Who Garlanded Lynching Convicts", url:"https://thewire.in/politics/jayant-sinha-lynching-jharkhand-garland", date:"Jul 2018", color:"#f03e3e"},
-    {source:"NDTV", title:"Jharkhand Lynching: 11 Convicted in Alimuddin Ansari Case", url:"https://www.ndtv.com/india-news/11-convicted-in-jharkhand-lynching-case-1885428", date:"2018", color:"#4dabf7"},
-    {source:"The Hindu", title:"Alimuddin lynching: Minister garlands convicts", url:"https://www.thehindu.com/news/national/other-states/minister-jayant-sinha-garlands-lynching-convicts/article24527756.ece", date:"2018", color:"#20c997"},
-  ],
-  related:[1,4,8,5],
-  tags:["Jharkhand","Bajrang Dal","meat trader","minister garlanded convicts","Ramgarh"],
-},
-{
-  id:8, title:"Rakbar Khan Lynching — Alwar",
-  state:"Rajasthan", district:"Alwar", lat:27.55, lng:76.61,
-  year:2018, date:"2018-07-20",
-  type:"Mob Lynching", deaths:1, injured:0,
-  trigger:"Transporting cows; beaten by mob; police delayed medical attention",
-  description:"Rakbar Khan, a 28-year-old cattle trader, was returning home with two cows when he was attacked by a mob near Lalawandi village in Alwar. He was beaten to death. Police took three hours to take him to hospital — and were reportedly seen having tea nearby while he lay dying. The cows he was carrying were taken to a gaushala. Two police officers were suspended for negligence.",
-  outcome:"partial_justice",
-  outcome_text:"3 arrested. 2 police suspended. But main accused Paramjeet convicted in 2022 only after 4 years.",
-  timeline:[
-    {date:"20 Jul 2018", text:"Rakbar attacked while transporting cows near Lalawandi", key:true},
-    {date:"20 Jul 2018", text:"Police take 3 hours to hospitalise him; reportedly had tea nearby"},
-    {date:"21 Jul 2018", text:"Rakbar dies; 2 police suspended", key:true},
-    {date:"2018-19", text:"3 accused arrested; trial begins"},
-    {date:"2022", text:"Paramjeet convicted and sentenced", key:true},
-  ],
-  victims:["Rakbar Khan, 28, cattle trader"],
-  accused:["Paramjeet (convicted)", "Naresh Kumar", "Dharmendra"],
-  articles:[
-    {source:"The Wire", title:"Rakbar Khan Lynching: Police Had Tea While He Lay Dying", url:"https://thewire.in/communalism/rakbar-khan-alwar-lynching-police-tea", date:"Jul 2018", color:"#f03e3e"},
-    {source:"Scroll.in", title:"Alwar lynching: Police inaction in Rakbar Khan case", url:"https://scroll.in/article/887004/alwar-lynching", date:"2018", color:"#4dabf7"},
-    {source:"FactChecker.in", title:"Cow-related violence data entry: Rakbar Khan", url:"https://factchecker.in/the-facts/", date:"2018", color:"#20c997"},
-  ],
-  related:[1,3,7,13],
-  tags:["Rajasthan","Alwar","police negligence","cow vigilantism","2018"],
-},
-{
-  id:9, title:"Haridwar Dharam Sansad — Genocide Calls",
-  state:"Uttarakhand", district:"Haridwar", lat:29.94, lng:78.16,
-  year:2021, date:"2021-12-17",
-  type:"Hate Speech", deaths:0, injured:0,
-  trigger:"Religious gathering where leaders explicitly called for killing Muslims",
-  description:"At a 3-day 'Dharam Sansad' (Religious Parliament) in Haridwar, religious leaders Yati Narsinghanand, Annapurna Maa, and others explicitly called for genocide of Muslims. Narsinghanand said Hindus must take up weapons and kill Muslims. Swami Prabodhanand Giri said police and army must kill Muslims. Videos went viral. Despite multiple FIRs, arrests were delayed and minimal. A similar event took place in Delhi days later.",
-  outcome:"minimal_action",
-  outcome_text:"FIRs filed after Supreme Court intervention. Yati Narsinghanand arrested briefly, released on bail. No serious prosecution.",
-  timeline:[
-    {date:"17-19 Dec 2021", text:"Dharam Sansad held in Haridwar; genocide calls made on video", key:true},
-    {date:"Dec 2021", text:"Videos go viral; journalists and civil society file complaints"},
-    {date:"Jan 2022", text:"SC takes cognisance; asks UP & Uttarakhand police to explain"},
-    {date:"Jan 2022", text:"Yati Narsinghanand arrested; released on bail within days", key:true},
-    {date:"2022-23", text:"Dharam Sansads continue in other cities; minimal police action"},
-  ],
-  victims:["Muslim community at large"],
-  accused:["Yati Narsinghanand Saraswati", "Annapurna Maa", "Swami Prabodhanand Giri", "others"],
-  articles:[
-    {source:"The Wire", title:"Haridwar Dharam Sansad: Calls for Genocide of Muslims", url:"https://thewire.in/communalism/haridwar-dharam-sansad-genocide-call-muslims", date:"Dec 2021", color:"#f03e3e"},
-    {source:"Al Jazeera", title:"India: Calls for genocide of Muslims at Hindu gathering", url:"https://www.aljazeera.com/news/2022/1/5/calls-for-genocide-of-muslims-at-hindu-gathering-in-india", date:"Jan 2022", color:"#4dabf7"},
-    {source:"HRW", title:"India: Act on Calls for Anti-Muslim Violence", url:"https://www.hrw.org/news/2022/01/07/india-act-calls-anti-muslim-violence", date:"Jan 2022", color:"#20c997"},
-    {source:"Scroll.in", title:"Haridwar hate speech: What was said and what happened next", url:"https://scroll.in/article/1014855/haridwar-dharam-sansad", date:"2022", color:"#f59f00"},
-  ],
-  related:[5,6,18,19],
-  tags:["Dharam Sansad","Haridwar","genocide","hate speech","Yati Narsinghanand","2021"],
-},
-{
-  id:10, title:"Khargone Riot & Bulldozer Action",
-  state:"Madhya Pradesh", district:"Khargone", lat:21.82, lng:75.61,
-  year:2022, date:"2022-04-10",
-  type:"Communal Riot", deaths:0, injured:25,
-  trigger:"Stone pelting during Ram Navami procession; state then bulldozed Muslim homes",
-  description:"Communal violence broke out in Khargone during Ram Navami celebrations. While violence occurred from both sides, the Madhya Pradesh government deployed bulldozers specifically to demolish Muslim homes and properties — including that of a local Congress leader. The demolitions were carried out within hours, before any court order or due process. The Supreme Court later condemned 'bulldozer justice' as a practice across BJP-ruled states.",
-  outcome:"ongoing",
-  outcome_text:"SC condemns bulldozer demolitions. Compensation ordered for some victims. Criminal cases mostly against Muslims.",
-  timeline:[
-    {date:"10 Apr 2022", text:"Stone pelting during Ram Navami; clashes break out", key:true},
-    {date:"11 Apr 2022", text:"Bulldozers demolish Muslim homes and shops overnight", key:true},
-    {date:"Apr 2022", text:"Video of demolitions goes viral; national outrage"},
-    {date:"Oct 2024", text:"SC rules bulldozer demolitions without due process are illegal", key:true},
-  ],
-  victims:["25+ injured; hundreds left homeless by demolitions"],
-  accused:["State government for demolitions without due process"],
-  articles:[
-    {source:"The Wire", title:"Khargone: The Anatomy of Bulldozer Justice", url:"https://thewire.in/communalism/khargone-communal-violence-bulldozer", date:"Apr 2022", color:"#f03e3e"},
-    {source:"Al Jazeera", title:"India 'bulldozer justice': Demolishing Muslims' homes as punishment", url:"https://www.aljazeera.com/news/2022/4/20/indias-bulldozer-justice", date:"Apr 2022", color:"#4dabf7"},
-    {source:"HRW", title:"India: Authorities Demolish Muslim Homes After Communal Violence", url:"https://www.hrw.org/news/2022/04/15/india-authorities-demolish-muslim-homes-after-communal-violence", date:"2022", color:"#20c997"},
-  ],
-  related:[6,5,11,12],
-  tags:["Khargone","MP","bulldozer","Ram Navami","collective punishment","2022"],
-},
-{
-  id:11, title:"Muzaffarnagar Riots",
-  state:"Uttar Pradesh", district:"Muzaffarnagar", lat:29.47, lng:77.70,
-  year:2013, date:"2013-09-07",
-  type:"Communal Riot", deaths:65, injured:150,
-  trigger:"Rumour about Hindu girl + Muslim man; fake viral video used to inflame",
-  description:"The worst communal riots in Uttar Pradesh since the 1980s. 65 people were killed, 93 injured, and over 50,000 Muslims were displaced from their villages. The riots were triggered by a fabricated story and a fake video (actually from Pakistan). A mahapanchayat (caste council) inflamed passions before the violence. The riots created deep demographic changes in western UP, with Muslim communities concentrating in towns and Hindu communities consolidating villages.",
-  outcome:"minimal_justice",
-  outcome_text:"BJP MLAs chargesheeted but cases moved slowly. Most displaced families never returned home. Pattern of BJP vote consolidation observed.",
-  timeline:[
-    {date:"27 Aug 2013", text:"Alleged incident involving a girl; local tension starts"},
-    {date:"7 Sep 2013", text:"Mahapanchayat; BJP MLAs give inflammatory speeches", key:true},
-    {date:"7-10 Sep 2013", text:"65 killed, 150 injured, 50,000+ displaced", key:true},
-    {date:"Sep-Oct 2013", text:"Relief camps established; thousands in camps through winter"},
-    {date:"2014", text:"BJP wins UP in General Elections; credited partly to riot consolidation"},
-    {date:"2015-23", text:"Cases drag on; most accused politicians still active"},
-  ],
-  victims:["65 killed, majority Muslim", "50,000+ displaced"],
-  accused:["BJP MLAs Sangeet Som, Suresh Rana, Bhartendu Singh chargesheeted"],
-  articles:[
-    {source:"HRW", title:"India: Investigate Muzaffarnagar Violence", url:"https://www.hrw.org/news/2013/09/10/india-investigate-muzaffarnagar-violence", date:"Sep 2013", color:"#f03e3e"},
-    {source:"The Guardian", title:"Muzaffarnagar riots: India's shame", url:"https://www.theguardian.com/world/2013/sep/09/muzaffarnagar-riots-india", date:"2013", color:"#4dabf7"},
-    {source:"Al Jazeera", title:"Muzaffarnagar riots: Still no justice", url:"https://www.aljazeera.com/features/2019/9/7/muzaffarnagar-riots-six-years-on-victims-still-await-justice", date:"2019", color:"#20c997"},
-  ],
-  related:[5,6,10,12],
-  tags:["Muzaffarnagar","UP","2013","displacement","BJP","mahapanchayat","riots"],
-},
-{
-  id:12, title:"Sulli Deals / Bulli Bai — Online Targeting of Muslim Women",
-  state:"Delhi", district:"Delhi", lat:28.62, lng:77.21,
-  year:2021, date:"2021-07-04",
-  type:"Threats/Coercion", deaths:0, injured:0,
-  trigger:"Apps created on GitHub to 'auction' prominent Muslim women",
-  description:"Two apps — 'Sulli Deals' (July 2021) and 'Bulli Bai' (January 2022) — were created on GitHub and hosted on open-source platforms to 'auction' prominent Muslim women journalists, activists, and academics. Hundreds of Muslim women were listed with their photos, names and workplaces as items for sale. The apps were available for months before action was taken. Several creators were arrested but cases moved slowly.",
-  outcome:"partial_justice",
-  outcome_text:"Several creators arrested. But apps were available for months. Pattern of targeted harassment of Muslim women online documented.",
-  timeline:[
-    {date:"Jul 2021", text:"Sulli Deals app lists Muslim women for 'auction' on GitHub", key:true},
-    {date:"Jul-Dec 2021", text:"Complaints filed; slow police response; app runs for months"},
-    {date:"1 Jan 2022", text:"Bulli Bai app discovered; similar targeting", key:true},
-    {date:"Jan 2022", text:"Multiple arrests; cases transferred to Delhi Police"},
-    {date:"2022-23", text:"Trial ongoing; accused out on bail"},
-  ],
-  victims:["Hundreds of Muslim women journalists, activists, academics"],
-  accused:["Vishal Kumar Jha", "Shweta Singh", "Mayank Rawal (Bulli Bai)", "Aumkareshwar Thakur (Sulli Deals)"],
-  articles:[
-    {source:"The Wire", title:"Sulli Deals: Muslim Women Listed for 'Auction' on GitHub", url:"https://thewire.in/women/sulli-deals-github-muslim-women-auction", date:"Jul 2021", color:"#f03e3e"},
-    {source:"Al Jazeera", title:"Bulli Bai app: Indian Muslim women targeted again", url:"https://www.aljazeera.com/news/2022/1/2/indias-bulli-bai-app-targets-muslim-women-with-mock-auction", date:"Jan 2022", color:"#4dabf7"},
-    {source:"BBC", title:"India's Sulli Deals app puts Muslim women up for auction", url:"https://www.bbc.com/news/world-asia-india-57999867", date:"Jul 2021", color:"#20c997"},
-  ],
-  related:[9,5,13],
-  tags:["Sulli Deals","Bulli Bai","Muslim women","online targeting","GitHub","2021","2022"],
-},
-{
-  id:13, title:"Karauli Riots — Rajasthan",
-  state:"Rajasthan", district:"Karauli", lat:26.50, lng:77.00,
-  year:2022, date:"2022-04-02",
-  type:"Communal Riot", deaths:0, injured:35,
-  trigger:"Bike rally on Hindu new year passes through Muslim area playing inflammatory songs",
-  description:"Communal violence broke out in Karauli during the Hindu new year celebrations when a bike rally passed through a Muslim-majority area playing inflammatory anti-Muslim songs. Stones were pelted, shops burned, and 35 people were injured. The incident was widely condemned as a pattern of processions through minority areas as provocation.",
-  outcome:"ongoing",
-  outcome_text:"100+ arrested. Curfew imposed. Inquiry ordered by Rajasthan government.",
-  timeline:[
-    {date:"2 Apr 2022", text:"Bike rally with inflammatory songs enters Muslim area", key:true},
-    {date:"2 Apr 2022", text:"Stone pelting, arson; 35 injured"},
-    {date:"Apr 2022", text:"Curfew; internet shutdown; 100+ arrested"},
-    {date:"2022", text:"Rajasthan government inquiry; similar patterns documented in other states"},
-  ],
-  victims:["35 injured; shops and homes burned"],
-  accused:["100+ arrested; investigation ongoing"],
-  articles:[
-    {source:"The Wire", title:"Karauli Violence: A Planned Provocation?", url:"https://thewire.in/communalism/karauli-rajasthan-riots-bike-rally", date:"Apr 2022", color:"#f03e3e"},
-    {source:"Scroll.in", title:"Karauli communal violence: What happened", url:"https://scroll.in/article/1021031/karauli-communal-violence", date:"Apr 2022", color:"#4dabf7"},
-    {source:"NDTV", title:"Karauli Violence: Curfew Continues", url:"https://www.ndtv.com/india-news/karauli-violence-rajasthan-communal-clashes", date:"2022", color:"#20c997"},
-  ],
-  related:[10,6,5,1],
-  tags:["Karauli","Rajasthan","bike rally","Ram Navami","2022","procession"],
-},
-{
-  id:14, title:"Khunti Lynching — Jharkhand",
-  state:"Jharkhand", district:"Khunti", lat:23.07, lng:85.28,
-  year:2019, date:"2019-05-18",
-  type:"Mob Lynching", deaths:0, injured:4,
-  trigger:"WhatsApp child kidnapping rumour; mob attacks Muslim men",
-  description:"Four Muslim men were severely beaten by a mob in Khunti district after a WhatsApp rumour spread claiming they were child kidnappers. The men, who were actually visiting relatives, were attacked by hundreds of villagers. The incident was part of a national wave of mob violence triggered by WhatsApp misinformation about child kidnapping that killed dozens across India in 2018-19.",
-  outcome:"partial_justice",
-  outcome_text:"Several attackers arrested. Whatsapp issued warnings. Pattern of misinformation-triggered mob violence documented.",
-  timeline:[
-    {date:"May 2019", text:"WhatsApp rumour spreads claiming men are child kidnappers", key:true},
-    {date:"18 May 2019", text:"Mob beats four Muslim men; police arrive late"},
-    {date:"2019", text:"Arrests made; part of national WhatsApp mob violence wave"},
-  ],
-  victims:["4 Muslim men injured"],
-  accused:["Multiple arrested"],
-  articles:[
-    {source:"IndiaSpend", title:"WhatsApp Rumours Killed 30+ People in India", url:"https://indiaspend.com/whatsapp-rumours-led-to-30-mob-killings-india", date:"2018", color:"#f03e3e"},
-    {source:"BBC", title:"WhatsApp: The 'black hole' of fake news in India", url:"https://www.bbc.com/news/world-asia-india-44855896", date:"2018", color:"#4dabf7"},
-  ],
-  related:[4,7,2],
-  tags:["Jharkhand","WhatsApp","fake news","child kidnapping rumour","mob violence"],
-},
-{
-  id:15, title:"Manipur — Systematic Violence Against Minority Kuki-Zo Christians",
-  state:"Manipur", district:"Churachandpur", lat:24.33, lng:93.67,
-  year:2023, date:"2023-05-03",
-  type:"Communal Riot", deaths:220, injured:500,
-  trigger:"Tribal land rights dispute; majority Meitei vs minority Kuki-Zo",
-  description:"Manipur has seen over 220 deaths, 500+ injuries, and 60,000+ displaced since May 2023 in ethnic-religious violence between the predominantly Hindu Meitei community and the predominantly Christian Kuki-Zo tribal communities. Churches were burned, villages cleared. A viral video showed two Kuki women being paraded naked by a mob. PM Modi stayed silent for 78 days before making a statement. UN and international bodies have called for intervention.",
-  outcome:"ongoing",
-  outcome_text:"78 days of PM silence. 220+ dead. 60,000+ displaced. No major prosecution of Meitei attackers.",
-  timeline:[
-    {date:"3 May 2023", text:"Violence erupts; churches burned; villages attacked", key:true},
-    {date:"May-Jul 2023", text:"220+ deaths, 60,000+ displaced; internet shut down for months"},
-    {date:"19 Jul 2023", text:"Video of two women paraded naked goes viral", key:true},
-    {date:"20 Jul 2023", text:"PM Modi speaks for first time after 78 days of silence"},
-    {date:"2023-24", text:"Case continues; displaced families in relief camps"},
-  ],
-  victims:["220+ dead, majority Kuki-Zo Christian", "60,000+ displaced"],
-  accused:["Multiple Meitei extremist groups; state government inaction"],
-  articles:[
-    {source:"BBC", title:"Manipur: The crisis India has tried to ignore", url:"https://www.bbc.com/news/world-asia-india-66213279", date:"2023", color:"#f03e3e"},
-    {source:"HRW", title:"India: Manipur Violence Demands Accountability", url:"https://www.hrw.org/news/2023/07/21/india-manipur-violence-demands-accountability", date:"Jul 2023", color:"#4dabf7"},
-    {source:"Al Jazeera", title:"Manipur violence: Six months of death and displacement", url:"https://www.aljazeera.com/news/2023/11/3/manipur-violence-six-months-of-death-and-displacement", date:"Nov 2023", color:"#20c997"},
-    {source:"The Wire", title:"Manipur Crisis: Complete Documentation", url:"https://thewire.in/communalism/manipur-violence-documentation", date:"2023", color:"#f59f00"},
-  ],
-  related:[5,6,11],
-  tags:["Manipur","Kuki-Zo","Christians","ethnic violence","2023","displacement","78 days"],
-},
+{id:1,title:"Pehlu Khan Lynching — Alwar",state:"Rajasthan",district:"Alwar",lat:27.56,lng:76.60,year:2017,date:"2017-04-01",type:"Mob Lynching",deaths:1,injured:2,trigger:"Returning from cattle fair with cows",description:"Pehlu Khan, a 55-year-old dairy farmer from Haryana, was attacked by a mob of 200 people on National Highway 8 near Behror in Alwar district. He had documentation proving legal purchase of cows at a livestock fair. He died two days later from injuries. His sons were also beaten. Police initially filed a case against Pehlu Khan and his sons under the Rajasthan Bovine Animal Act — effectively treating the victims as accused.",outcome:"acquitted_accused",outcome_text:"All 6 accused acquitted by Alwar sessions court in 2019. Police had filed case against victims too.",timeline:[{date:"1 Apr 2017",text:"Mob attacks Pehlu Khan on NH-8 near Behror",key:true},{date:"3 Apr 2017",text:"Pehlu Khan dies of injuries at hospital",key:true},{date:"5 Apr 2017",text:"FIR filed — also names Pehlu Khan's sons as accused"},{date:"Aug 2019",text:"Sessions court acquits all 6 accused citing weak evidence",key:true},{date:"2020",text:"Rajasthan HC takes up case on suo motu; CBI probe ordered"},{date:"2023",text:"Case still pending in higher courts"}],victims:["Pehlu Khan, 55, dairy farmer"],accused:["Vipin Yadav","Ravindra Kumar","Jetpal","Kaluram","Yogesh Kumar","Bhim Rathi (6 total)"],articles:[{source:"The Wire",title:"Pehlu Khan Case: How the System Failed a Lynching Victim",url:"https://thewire.in/communalism/pehlu-khan-acquittal-alwar-lynching",date:"Aug 2019",color:"#4dabf7"},{source:"The Hindu",title:"All six accused in Pehlu Khan lynching case acquitted",url:"https://www.thehindu.com/news/national/all-six-accused-in-pehlu-khan-lynching-case-acquitted/article29191610.ece",date:"14 Aug 2019",color:"#20c997"},{source:"Human Rights Watch",title:"Violent Cow Protection in India",url:"https://www.hrw.org/report/2019/02/18/violent-cow-protection-india/vigilante-groups-attack-minorities",date:"Feb 2019",color:"#f59f00"}],related:[3,11,13,9,14],tags:["cow vigilantism","Rajasthan","dairy farmer","acquittal","highway lynching"]},
+{id:2,title:"Mohammad Akhlaq Lynching — Dadri",state:"Uttar Pradesh",district:"Greater Noida",lat:28.50,lng:77.53,year:2015,date:"2015-09-28",type:"Mob Lynching",deaths:1,injured:1,trigger:"False rumour of beef storage spread via temple loudspeaker",description:"Mohammad Akhlaq, 52, was dragged out of his home in Bisara village by a mob of 100-200 people after an announcement from the local temple that his family had stored beef. The meat was later tested and found to be mutton. This case became a major national flashpoint and sparked the 'Award Wapsi' protest movement.",outcome:"acquitted_accused",outcome_text:"Key accused Vishal Rana died in 2018. Charges against remaining accused weakened after UP Police filed closure report.",timeline:[{date:"28 Sep 2015",text:"Mosque announcement triggers mob; Akhlaq dragged out and beaten to death",key:true},{date:"Oct 2015",text:"Test confirms meat is mutton, not beef"},{date:"Oct 2015",text:"'Award Wapsi' movement begins nationally",key:true},{date:"2020",text:"UP Police files closure report; family moves HC"}],victims:["Mohammad Akhlaq, 52","Danish (son), critically injured"],accused:["Vishal Rana (deceased)","16 others arrested initially"],articles:[{source:"BBC",title:"India Dadri beef lynching: Mohammad Akhlaq death probe",url:"https://www.bbc.com/news/world-asia-india-34493754",date:"Oct 2015",color:"#f03e3e"},{source:"The Guardian",title:"Indian man lynched by mob over beef rumours",url:"https://www.theguardian.com/world/2015/sep/29/indian-man-lynched-by-mob-over-beef-rumours-in-uttar-pradesh",date:"29 Sep 2015",color:"#4dabf7"}],related:[1,3,8,10,4],tags:["cow vigilantism","UP","fake rumour","Award Wapsi","Dadri","beef"]},
+{id:3,title:"Junaid Khan Stabbing — Ballabhgarh Train",state:"Haryana",district:"Faridabad",lat:28.34,lng:77.32,year:2017,date:"2017-06-22",type:"Mob Lynching",deaths:1,injured:2,trigger:"Argument over train seat escalated with anti-Muslim slurs, beef accusations",description:"16-year-old Junaid Khan was stabbed to death on a crowded Delhi–Mathura train near Ballabhgarh station in Haryana. He and his brothers were returning home after Eid shopping. A fight over train seats escalated when attackers called them beef-eaters and removed their skull caps. The case triggered the #NotInMyName protest.",outcome:"convicted",outcome_text:"Naresh, the main accused, convicted for murder by Faridabad sessions court in 2018. Sentenced to life imprisonment.",timeline:[{date:"22 Jun 2017",text:"Junaid and brothers board Delhi-Mathura train after Eid shopping",key:true},{date:"22 Jun 2017",text:"Junaid stabbed and thrown from moving train near Ballabhgarh",key:true},{date:"Jun 2017",text:"#NotInMyName protests erupt across India"},{date:"2018",text:"Naresh convicted and sentenced to life imprisonment",key:true}],victims:["Junaid Khan, 16, student"],accused:["Naresh (main accused, convicted)","Shri Bhagwan","others"],articles:[{source:"The Wire",title:"Junaid's Killing: What We Know, What We Don't",url:"https://thewire.in/communalism/junaid-killing-train-haryana",date:"Jun 2017",color:"#4dabf7"}],related:[1,2,7,4],tags:["train attack","Haryana","Eid","skull cap","beef accusation","NotInMyName"]},
+{id:4,title:"Tabrez Ansari Lynching — Seraikela",state:"Jharkhand",district:"Seraikela",lat:22.59,lng:85.93,year:2019,date:"2019-06-17",type:"Mob Lynching",deaths:1,injured:0,trigger:"Alleged motorcycle theft; mob forced him to chant 'Jai Shri Ram'",description:"24-year-old Tabrez Ansari was tied to a pole in Seraikela Kharsawan district and beaten by a mob for nearly 12 hours. The mob forced him to chant 'Jai Shri Ram' and 'Jai Hanuman' while beating him. Police arrived and kept him in custody for four days without medical treatment. He died on June 22.",outcome:"partial_justice",outcome_text:"11 accused arrested. Jharkhand HC upgraded charges to murder. Several accused out on bail.",timeline:[{date:"17 Jun 2019",text:"Tabrez tied to pole, beaten for 12 hours, forced to chant Jai Shri Ram",key:true},{date:"22 Jun 2019",text:"Tabrez dies in hospital from injuries",key:true},{date:"2019",text:"Jharkhand HC directs upgrade of charges from culpable homicide to murder"}],victims:["Tabrez Ansari, 24"],accused:["11 people arrested; Pappu Mandal identified as key attacker"],articles:[{source:"Al Jazeera",title:"India lynching: Tabrez Ansari forced to chant Hindu slogans",url:"https://www.aljazeera.com/news/2019/6/23/india-muslims-outrage-tabrez-ansari-lynch-mob",date:"Jun 2019",color:"#f59f00"}],related:[1,5,8,6],tags:["Jharkhand","forced chanting","Jai Shri Ram","police failure","custody death"]},
+{id:5,title:"Delhi Riots — Northeast Delhi",state:"Delhi",district:"Northeast Delhi",lat:28.68,lng:77.29,year:2020,date:"2020-02-23",type:"Communal Riot",deaths:53,injured:200,trigger:"CAA protests; counter-mobilisation by BJP leaders",description:"The worst communal violence in Delhi since the 1984 anti-Sikh riots. Over 3 days (Feb 23-26, 2020), mobs attacked Muslim-majority areas in Northeast Delhi. 53 people were killed, over 200 injured, hundreds of homes and shops burned, mosques vandalized. HRW and Amnesty documented systematic targeting of Muslims.",outcome:"ongoing",outcome_text:"1,900+ people arrested. Most arrested are Muslim. Activists and students charged under UAPA. Main instigators not charged.",timeline:[{date:"23 Feb 2020",text:"BJP leader gives ultimatum to police; mobs mobilise",key:true},{date:"23-26 Feb",text:"53 killed, 200+ injured; mosques, homes, schools burned",key:true},{date:"2024",text:"Most key Hindu nationalist accused out on bail; Muslim accused in jail"}],victims:["53 killed, majority Muslim","200+ injured"],accused:["1900+ arrested; majority Muslim. BJP leaders not charged."],articles:[{source:"Human Rights Watch",title:"India: Delhi Police Implicated in Communal Violence",url:"https://www.hrw.org/news/2020/04/09/india-delhi-police-implicated-communal-violence",date:"Apr 2020",color:"#f03e3e"},{source:"BBC",title:"Delhi riots: The three days of violence that killed 53",url:"https://www.bbc.com/news/world-asia-india-51658504",date:"Feb 2020",color:"#f59f00"}],related:[12,15],tags:["CAA","Delhi","riots","UAPA","Kapil Mishra","Northeast Delhi","2020"]},
+{id:6,title:"Nuh Violence — Haryana",state:"Haryana",district:"Nuh",lat:28.10,lng:77.01,year:2023,date:"2023-07-31",type:"Communal Riot",deaths:6,injured:90,trigger:"VHP Brij Mandal Jalabhishek Yatra through Muslim-majority Mewat",description:"Violence broke out when a VHP religious procession attempted to pass through Nuh district. 6 people died including 2 home guards. 90+ were injured. The Haryana government deployed bulldozers to demolish Muslim homes and businesses in what critics called collective punishment.",outcome:"ongoing",outcome_text:"Bulldozer demolitions condemned by SC. 200+ arrested, predominantly Muslim. VHP leaders not arrested.",timeline:[{date:"31 Jul 2023",text:"VHP yatra procession triggers violence in Nuh",key:true},{date:"2 Aug 2023",text:"Bulldozers demolish Muslim shops and homes in Nuh and Gurugram",key:true}],victims:["6 killed","90+ injured","hundreds displaced by bulldozer action"],accused:["200+ arrested, majority Muslim. VHP leaders not charged."],articles:[{source:"Human Rights Watch",title:"India: Stop Demolitions as Collective Punishment",url:"https://www.hrw.org/news/2023/08/09/india-stop-demolitions-collective-punishment",date:"Aug 2023",color:"#f03e3e"}],related:[5,12,15],tags:["Nuh","Mewat","VHP","bulldozer","Haryana","2023","collective punishment"]},
+{id:7,title:"Alimuddin Ansari Lynching — Ramgarh",state:"Jharkhand",district:"Ramgarh",lat:23.64,lng:85.51,year:2017,date:"2017-06-29",type:"Mob Lynching",deaths:1,injured:0,trigger:"Alleged beef transport; set upon by Bajrang Dal members",description:"Alimuddin Ansari, a 35-year-old meat trader, was lynched by a mob led by Bajrang Dal members in Ramgarh district, Jharkhand. In 2018, Union minister Jayant Sinha garlanded 8 of the convicted accused when they were released on bail, triggering national outrage.",outcome:"convicted",outcome_text:"11 convicted by fast-track court. Union Minister Jayant Sinha garlanded accused on bail release — massive controversy.",timeline:[{date:"29 Jun 2017",text:"Alimuddin stopped by mob; beaten for hours; van set on fire",key:true},{date:"Jul 2018",text:"Union Minister Jayant Sinha garlands convicted accused out on bail",key:true}],victims:["Alimuddin Ansari, 35, meat trader"],accused:["11 convicted; Bajrang Dal members"],articles:[{source:"The Wire",title:"Jayant Sinha's Garland: Minister Who Garlanded Lynching Convicts",url:"https://thewire.in/politics/jayant-sinha-lynching-jharkhand-garland",date:"Jul 2018",color:"#f03e3e"}],related:[1,4,8,5],tags:["Jharkhand","Bajrang Dal","meat trader","minister garlanded convicts","Ramgarh"]},
+{id:8,title:"Rakbar Khan Lynching — Alwar",state:"Rajasthan",district:"Alwar",lat:27.55,lng:76.61,year:2018,date:"2018-07-20",type:"Mob Lynching",deaths:1,injured:0,trigger:"Transporting cows; beaten by mob; police delayed medical attention",description:"Rakbar Khan, a 28-year-old cattle trader, was returning home with two cows when attacked by a mob. Police took three hours to take him to hospital — reportedly seen having tea nearby while he lay dying.",outcome:"partial_justice",outcome_text:"3 arrested. 2 police suspended. Main accused Paramjeet convicted in 2022 only after 4 years.",timeline:[{date:"20 Jul 2018",text:"Rakbar attacked; police take 3 hours to hospitalise him",key:true},{date:"2022",text:"Paramjeet convicted and sentenced",key:true}],victims:["Rakbar Khan, 28, cattle trader"],accused:["Paramjeet (convicted)","Naresh Kumar","Dharmendra"],articles:[{source:"The Wire",title:"Rakbar Khan Lynching: Police Had Tea While He Lay Dying",url:"https://thewire.in/communalism/rakbar-khan-alwar-lynching-police-tea",date:"Jul 2018",color:"#f03e3e"}],related:[1,3,7,13],tags:["Rajasthan","Alwar","police negligence","cow vigilantism","2018"]},
+{id:9,title:"Haridwar Dharam Sansad — Genocide Calls",state:"Uttarakhand",district:"Haridwar",lat:29.94,lng:78.16,year:2021,date:"2021-12-17",type:"Hate Speech",deaths:0,injured:0,trigger:"Religious gathering where leaders explicitly called for killing Muslims",description:"At a 3-day 'Dharam Sansad' in Haridwar, religious leaders Yati Narsinghanand, Annapurna Maa, and others explicitly called for genocide of Muslims. Despite multiple FIRs, arrests were delayed and minimal.",outcome:"minimal_action",outcome_text:"FIRs filed after Supreme Court intervention. Yati Narsinghanand arrested briefly, released on bail.",timeline:[{date:"17-19 Dec 2021",text:"Dharam Sansad held in Haridwar; genocide calls made on video",key:true},{date:"Jan 2022",text:"Yati Narsinghanand arrested; released on bail within days",key:true}],victims:["Muslim community at large"],accused:["Yati Narsinghanand Saraswati","Annapurna Maa","Swami Prabodhanand Giri"],articles:[{source:"Al Jazeera",title:"India: Calls for genocide of Muslims at Hindu gathering",url:"https://www.aljazeera.com/news/2022/1/5/calls-for-genocide-of-muslims-at-hindu-gathering-in-india",date:"Jan 2022",color:"#4dabf7"}],related:[5,6],tags:["Dharam Sansad","Haridwar","genocide","hate speech","Yati Narsinghanand","2021"]},
+{id:10,title:"Khargone Riot & Bulldozer Action",state:"Madhya Pradesh",district:"Khargone",lat:21.82,lng:75.61,year:2022,date:"2022-04-10",type:"Communal Riot",deaths:0,injured:25,trigger:"Stone pelting during Ram Navami procession; state then bulldozed Muslim homes",description:"Communal violence broke out in Khargone during Ram Navami celebrations. The Madhya Pradesh government deployed bulldozers specifically to demolish Muslim homes and properties without any court order or due process.",outcome:"ongoing",outcome_text:"SC condemns bulldozer demolitions. Compensation ordered for some victims. Criminal cases mostly against Muslims.",timeline:[{date:"10 Apr 2022",text:"Stone pelting during Ram Navami; clashes break out",key:true},{date:"11 Apr 2022",text:"Bulldozers demolish Muslim homes and shops overnight",key:true},{date:"Oct 2024",text:"SC rules bulldozer demolitions without due process are illegal",key:true}],victims:["25+ injured; hundreds left homeless by demolitions"],accused:["State government for demolitions without due process"],articles:[{source:"Al Jazeera",title:"India 'bulldozer justice': Demolishing Muslims' homes as punishment",url:"https://www.aljazeera.com/news/2022/4/20/indias-bulldozer-justice",date:"Apr 2022",color:"#4dabf7"}],related:[6,5,11,12],tags:["Khargone","MP","bulldozer","Ram Navami","collective punishment","2022"]},
+{id:11,title:"Muzaffarnagar Riots",state:"Uttar Pradesh",district:"Muzaffarnagar",lat:29.47,lng:77.70,year:2013,date:"2013-09-07",type:"Communal Riot",deaths:65,injured:150,trigger:"Rumour about Hindu girl + Muslim man; fake viral video used to inflame",description:"The worst communal riots in Uttar Pradesh since the 1980s. 65 people were killed and over 50,000 Muslims were displaced from their villages. The riots were triggered by a fabricated story and a fake video. A mahapanchayat inflamed passions before the violence.",outcome:"minimal_justice",outcome_text:"BJP MLAs chargesheeted but cases moved slowly. Most displaced families never returned home.",timeline:[{date:"7 Sep 2013",text:"Mahapanchayat; BJP MLAs give inflammatory speeches",key:true},{date:"7-10 Sep 2013",text:"65 killed, 150 injured, 50,000+ displaced",key:true}],victims:["65 killed, majority Muslim","50,000+ displaced"],accused:["BJP MLAs Sangeet Som, Suresh Rana, Bhartendu Singh chargesheeted"],articles:[{source:"HRW",title:"India: Investigate Muzaffarnagar Violence",url:"https://www.hrw.org/news/2013/09/10/india-investigate-muzaffarnagar-violence",date:"Sep 2013",color:"#f03e3e"}],related:[5,6,10,12],tags:["Muzaffarnagar","UP","2013","displacement","BJP","mahapanchayat","riots"]},
+{id:12,title:"Sulli Deals / Bulli Bai — Online Targeting of Muslim Women",state:"Delhi",district:"Delhi",lat:28.62,lng:77.21,year:2021,date:"2021-07-04",type:"Threats/Coercion",deaths:0,injured:0,trigger:"Apps created on GitHub to 'auction' prominent Muslim women",description:"Two apps — 'Sulli Deals' (July 2021) and 'Bulli Bai' (January 2022) — were created on GitHub to 'auction' prominent Muslim women journalists, activists, and academics. Hundreds of Muslim women were listed with their photos and workplaces as items for sale.",outcome:"partial_justice",outcome_text:"Several creators arrested. But apps were available for months.",timeline:[{date:"Jul 2021",text:"Sulli Deals app lists Muslim women for 'auction' on GitHub",key:true},{date:"1 Jan 2022",text:"Bulli Bai app discovered; similar targeting",key:true}],victims:["Hundreds of Muslim women journalists, activists, academics"],accused:["Vishal Kumar Jha","Shweta Singh","Mayank Rawal (Bulli Bai)","Aumkareshwar Thakur (Sulli Deals)"],articles:[{source:"BBC",title:"India's Sulli Deals app puts Muslim women up for auction",url:"https://www.bbc.com/news/world-asia-india-57999867",date:"Jul 2021",color:"#20c997"}],related:[9,5,13],tags:["Sulli Deals","Bulli Bai","Muslim women","online targeting","GitHub","2021","2022"]},
+{id:13,title:"Karauli Riots — Rajasthan",state:"Rajasthan",district:"Karauli",lat:26.50,lng:77.00,year:2022,date:"2022-04-02",type:"Communal Riot",deaths:0,injured:35,trigger:"Bike rally on Hindu new year passes through Muslim area playing inflammatory songs",description:"Communal violence broke out in Karauli during the Hindu new year celebrations when a bike rally passed through a Muslim-majority area playing inflammatory anti-Muslim songs. Stones were pelted, shops burned, and 35 people were injured.",outcome:"ongoing",outcome_text:"100+ arrested. Curfew imposed. Inquiry ordered by Rajasthan government.",timeline:[{date:"2 Apr 2022",text:"Bike rally with inflammatory songs enters Muslim area; stone pelting; 35 injured",key:true}],victims:["35 injured; shops and homes burned"],accused:["100+ arrested; investigation ongoing"],articles:[{source:"The Wire",title:"Karauli Violence: A Planned Provocation?",url:"https://thewire.in/communalism/karauli-rajasthan-riots-bike-rally",date:"Apr 2022",color:"#f03e3e"}],related:[10,6,5,1],tags:["Karauli","Rajasthan","bike rally","Ram Navami","2022","procession"]},
+{id:14,title:"Khunti Lynching — Jharkhand",state:"Jharkhand",district:"Khunti",lat:23.07,lng:85.28,year:2019,date:"2019-05-18",type:"Mob Lynching",deaths:0,injured:4,trigger:"WhatsApp child kidnapping rumour; mob attacks Muslim men",description:"Four Muslim men were severely beaten by a mob in Khunti district after a WhatsApp rumour spread claiming they were child kidnappers. Part of a national wave of mob violence triggered by WhatsApp misinformation.",outcome:"partial_justice",outcome_text:"Several attackers arrested. Part of documented national WhatsApp mob violence wave.",timeline:[{date:"18 May 2019",text:"Mob beats four Muslim men based on WhatsApp rumour",key:true}],victims:["4 Muslim men injured"],accused:["Multiple arrested"],articles:[{source:"BBC",title:"WhatsApp: The 'black hole' of fake news in India",url:"https://www.bbc.com/news/world-asia-india-44855896",date:"2018",color:"#4dabf7"}],related:[4,7,2],tags:["Jharkhand","WhatsApp","fake news","child kidnapping rumour","mob violence"]},
+{id:15,title:"Manipur — Systematic Violence Against Minority Kuki-Zo Christians",state:"Manipur",district:"Churachandpur",lat:24.33,lng:93.67,year:2023,date:"2023-05-03",type:"Communal Riot",deaths:220,injured:500,trigger:"Tribal land rights dispute; majority Meitei vs minority Kuki-Zo",description:"Manipur has seen over 220 deaths, 500+ injuries, and 60,000+ displaced since May 2023 in ethnic-religious violence. Churches were burned, villages cleared. A viral video showed two Kuki women being paraded naked. PM Modi stayed silent for 78 days.",outcome:"ongoing",outcome_text:"78 days of PM silence. 220+ dead. 60,000+ displaced. No major prosecution of Meitei attackers.",timeline:[{date:"3 May 2023",text:"Violence erupts; churches burned; villages attacked",key:true},{date:"19 Jul 2023",text:"Video of two women paraded naked goes viral",key:true},{date:"20 Jul 2023",text:"PM Modi speaks for first time after 78 days of silence"}],victims:["220+ dead, majority Kuki-Zo Christian","60,000+ displaced"],accused:["Multiple Meitei extremist groups; state government inaction"],articles:[{source:"BBC",title:"Manipur: The crisis India has tried to ignore",url:"https://www.bbc.com/news/world-asia-india-66213279",date:"2023",color:"#f03e3e"},{source:"HRW",title:"India: Manipur Violence Demands Accountability",url:"https://www.hrw.org/news/2023/07/21/india-manipur-violence-demands-accountability",date:"Jul 2023",color:"#4dabf7"}],related:[5,6,11],tags:["Manipur","Kuki-Zo","Christians","ethnic violence","2023","displacement","78 days"]},
 ];
 
-// ============================================================
-// TYPE COLORS
-// ============================================================
+// ══════════════════════════════════════════════════════════════
+// CONFIG
+// ══════════════════════════════════════════════════════════════
 const TYPE_COLOR = {
   "Mob Lynching":     "#f03e3e",
   "Physical Assault": "#fd7e14",
@@ -1029,336 +551,511 @@ const TYPE_COLOR = {
   "Hate Speech":      "#f783ac",
   "Threats/Coercion": "#4dabf7",
   "General Report":   "#555880",
+  "Arrest/FIR":       "#f59f00",
+  "Bulldozer Action": "#fd7e14",
+  "Fake News Trigger":"#4dabf7",
+  "Cow Vigilantism":  "#f03e3e",
 };
 
 const OUTCOME_CONFIG = {
-  convicted:        { bg:"rgba(32,201,151,0.15)", color:"#20c997", icon:"⚖️", text:"Convicted" },
-  acquitted_accused:{ bg:"rgba(240,62,62,0.15)",  color:"#f03e3e", icon:"❌", text:"Accused Acquitted" },
-  partial_justice:  { bg:"rgba(245,159,0,0.15)",  color:"#f59f00", icon:"⚠️", text:"Partial Justice" },
-  minimal_action:   { bg:"rgba(253,126,20,0.15)", color:"#fd7e14", icon:"🔶", text:"Minimal Action" },
-  minimal_justice:  { bg:"rgba(253,126,20,0.15)", color:"#fd7e14", icon:"🔶", text:"Minimal Justice" },
-  ongoing:          { bg:"rgba(77,171,247,0.15)", color:"#4dabf7", icon:"🔄", text:"Ongoing" },
+  convicted:        {bg:"rgba(32,201,151,0.15)",  color:"#20c997", icon:"⚖️",  text:"Convicted"},
+  acquitted_accused:{bg:"rgba(240,62,62,0.15)",   color:"#f03e3e", icon:"❌",  text:"Accused Acquitted"},
+  partial_justice:  {bg:"rgba(245,159,0,0.15)",   color:"#f59f00", icon:"⚠️",  text:"Partial Justice"},
+  minimal_action:   {bg:"rgba(253,126,20,0.15)",  color:"#fd7e14", icon:"🔶", text:"Minimal Action"},
+  minimal_justice:  {bg:"rgba(253,126,20,0.15)",  color:"#fd7e14", icon:"🔶", text:"Minimal Justice"},
+  ongoing:          {bg:"rgba(77,171,247,0.15)",  color:"#4dabf7", icon:"🔄", text:"Ongoing"},
 };
 
-// ============================================================
+const ACC_INITIALS = {
+  "theobserverpost": "OP",
+  "hindutvawatch":   "HW",
+  "foejmedia":       "FM",
+};
+
+// ══════════════════════════════════════════════════════════════
 // APP STATE
-// ============================================================
-let map, heatLayer, markerGroup;
-let currentType = 'all';
-let currentView = 'pins';
-let selectedId  = null;
-let allMarkers  = [];
+// ══════════════════════════════════════════════════════════════
+let map, heatLayer, markerGroup, igMarkerGroup;
+let currentType   = 'all';
+let currentView   = 'pins';
+let selectedId    = null;
+let allMarkers    = [];
 
-// ============================================================
+// Instagram state
+let igData        = [];       // all loaded posts
+let igFiltered    = [];       // after account + search filter
+let igPanelOpen   = false;
+let igAccFilter   = 'all';
+let igSortMode    = 'date';
+let igSearchQuery = '';
+let igShowOnMap   = true;
+
+// ══════════════════════════════════════════════════════════════
 // MAP INIT
-// ============================================================
+// ══════════════════════════════════════════════════════════════
 function initMap() {
-  map = L.map('map', {
-    center: [22.5, 80],
-    zoom: 5,
-    zoomControl: true,
-    attributionControl: false,
+  map = L.map('map', { center:[22.5, 80], zoom:5, zoomControl:true, attributionControl:false });
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { maxZoom:18 }).addTo(map);
+  markerGroup   = L.layerGroup().addTo(map);
+  igMarkerGroup = L.layerGroup().addTo(map);
+
+  // Drag & drop JSON
+  document.addEventListener('dragover', e => e.preventDefault());
+  document.addEventListener('drop', e => {
+    e.preventDefault();
+    const f = e.dataTransfer.files[0];
+    if (f && f.name.endsWith('.json')) {
+      const r = new FileReader();
+      r.onload = ev => parseIgJson(ev.target.result);
+      r.readAsText(f);
+    }
   });
-
-  // Clean dark tile
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-    maxZoom: 18,
-  }).addTo(map);
-
-  markerGroup = L.layerGroup().addTo(map);
 }
 
-// ============================================================
+// ══════════════════════════════════════════════════════════════
 // MARKER ICONS
-// ============================================================
+// ══════════════════════════════════════════════════════════════
 function makeIcon(color, size=14, selected=false) {
-  const s = selected ? size + 4 : size;
-  const glow = selected ? `box-shadow:0 0 0 3px ${color}44, 0 0 20px ${color}66` : `box-shadow:0 0 8px ${color}88`;
+  const s   = selected ? size+4 : size;
+  const glow= selected
+    ? `box-shadow:0 0 0 3px ${color}44, 0 0 20px ${color}66`
+    : `box-shadow:0 0 8px ${color}88`;
   return L.divIcon({
-    className: '',
-    html: `<div style="
-      width:${s}px; height:${s}px;
-      background:${color};
-      border-radius:50%;
-      border: ${selected ? '2px' : '1.5px'} solid rgba(255,255,255,${selected?'0.8':'0.3'});
-      ${glow};
-      transition: all 0.2s;
-    "></div>`,
-    iconSize: [s, s],
-    iconAnchor: [s/2, s/2],
+    className:'',
+    html:`<div style="width:${s}px;height:${s}px;background:${color};border-radius:50%;border:${selected?'2':'1.5'}px solid rgba(255,255,255,${selected?'.8':'.3'});${glow};transition:all 0.2s"></div>`,
+    iconSize:[s,s], iconAnchor:[s/2,s/2],
   });
 }
 
-// ============================================================
+function makeIgIcon(size=11) {
+  return L.divIcon({
+    className:'',
+    html:`<div style="width:${size}px;height:${size}px;background:linear-gradient(135deg,#833ab4,#e1306c);border-radius:50%;border:1.5px solid rgba(255,255,255,0.5);box-shadow:0 0 8px rgba(225,48,108,0.7)"></div>`,
+    iconSize:[size,size], iconAnchor:[size/2,size/2],
+  });
+}
+
+// ══════════════════════════════════════════════════════════════
 // RENDER MAP
-// ============================================================
+// ══════════════════════════════════════════════════════════════
 function renderMap() {
   markerGroup.clearLayers();
-  if (heatLayer) { map.removeLayer(heatLayer); heatLayer = null; }
+  if (heatLayer) { map.removeLayer(heatLayer); heatLayer=null; }
   allMarkers = [];
 
   const data = getFiltered();
   updateStats(data);
 
   if (currentView === 'heat') {
-    const pts = data.map(d => [d.lat, d.lng, 0.6 + d.deaths * 0.01]);
-    heatLayer = L.heatLayer(pts, {
-      radius: 40, blur: 25, maxZoom: 10,
-      gradient: { 0.2:'#20c997', 0.5:'#f59f00', 0.8:'#f03e3e', 1:'#fff' }
-    }).addTo(map);
+    const pts = data.map(d => [d.lat, d.lng, 0.6+d.deaths*0.01]);
+    heatLayer = L.heatLayer(pts, { radius:40, blur:25, maxZoom:10, gradient:{0.2:'#20c997',0.5:'#f59f00',0.8:'#f03e3e',1:'#fff'} }).addTo(map);
     return;
   }
 
   if (currentView === 'cluster') {
-    // Simple grid clustering
     const grid = {};
     data.forEach(d => {
       const key = `${Math.round(d.lat*5)/5}_${Math.round(d.lng*5)/5}`;
-      if (!grid[key]) grid[key] = { items:[], lat:d.lat, lng:d.lng };
+      if (!grid[key]) grid[key] = {items:[], lat:d.lat, lng:d.lng};
       grid[key].items.push(d);
     });
     Object.values(grid).forEach(g => {
       const n = g.items.length;
       const dominant = g.items.sort((a,b)=>b.deaths-a.deaths)[0];
-      const color = TYPE_COLOR[dominant.type] || '#888';
-      L.circle([g.lat, g.lng], {
-        radius: Math.max(30000, n*20000),
-        color, fillColor: color, fillOpacity:0.08,
-        weight:1, dashArray:'3 5'
-      }).addTo(markerGroup);
-      L.marker([g.lat, g.lng], {
-        icon: L.divIcon({
-          className:'',
-          html:`<div style="background:rgba(5,6,14,0.9);border:1px solid ${color};color:${color};padding:3px 8px;border-radius:20px;font-family:DM Mono,monospace;font-size:11px;font-weight:500;white-space:nowrap">${n}</div>`,
-          iconAnchor:[16,10]
-        })
-      })
-      .bindTooltip(g.items.map(i=>`${i.title}<br><i>${i.year}</i>`).join('<br>───<br>'), {className:'leaflet-tooltip'})
-      .on('click', () => openCase(g.items[0].id))
-      .addTo(markerGroup);
+      const color = TYPE_COLOR[dominant.type]||'#888';
+      L.circle([g.lat,g.lng],{radius:Math.max(30000,n*20000),color,fillColor:color,fillOpacity:0.08,weight:1,dashArray:'3 5'}).addTo(markerGroup);
+      L.marker([g.lat,g.lng],{icon:L.divIcon({className:'',html:`<div style="background:rgba(5,6,14,0.9);border:1px solid ${color};color:${color};padding:3px 8px;border-radius:20px;font-family:DM Mono,monospace;font-size:11px;font-weight:500;white-space:nowrap">${n}</div>`,iconAnchor:[16,10]})})
+        .bindTooltip(g.items.map(i=>`${i.title}<br><i>${i.year}</i>`).join('<br>───<br>'),{className:'leaflet-tooltip'})
+        .on('click',()=>openCase(g.items[0].id))
+        .addTo(markerGroup);
     });
     return;
   }
 
-  // Default: pins
+  // Pins
   data.forEach(d => {
-    const color = TYPE_COLOR[d.type] || '#888';
+    const color    = TYPE_COLOR[d.type]||'#888';
     const selected = d.id === selectedId;
-    const size = Math.min(22, 12 + Math.sqrt(d.deaths + d.injured) * 1.2);
-    const marker = L.marker([d.lat, d.lng], {
-      icon: makeIcon(color, size, selected)
-    });
-
-    marker.bindTooltip(`
-      <b>${d.title}</b><br>
-      <span style="color:${color}">${d.type}</span> · ${d.year}<br>
-      ${d.state}${d.deaths > 0 ? ` · ☠ ${d.deaths}` : ''}
-    `, { className:'leaflet-tooltip', sticky:true });
-
-    marker.on('click', () => openCase(d.id));
+    const size     = Math.min(22, 12+Math.sqrt(d.deaths+d.injured)*1.2);
+    const marker   = L.marker([d.lat,d.lng], {icon:makeIcon(color,size,selected)});
+    marker.bindTooltip(`<b>${d.title}</b><br><span style="color:${color}">${d.type}</span> · ${d.year}<br>${d.state}${d.deaths>0?` · ☠ ${d.deaths}`:''}`,{className:'leaflet-tooltip',sticky:true});
+    marker.on('click',()=>openCase(d.id));
     marker.addTo(markerGroup);
-    allMarkers.push({ id: d.id, marker, color });
+    allMarkers.push({id:d.id, marker, color});
   });
 }
 
-// ============================================================
-// FILTERS
-// ============================================================
-function getFiltered() {
-  return currentType === 'all'
-    ? INCIDENTS
-    : INCIDENTS.filter(d => d.type === currentType);
+// ══════════════════════════════════════════════════════════════
+// INSTAGRAM MARKERS ON MAP
+// ══════════════════════════════════════════════════════════════
+function renderIgMarkers() {
+  igMarkerGroup.clearLayers();
+  if (!igShowOnMap || !igData.length) return;
+
+  const visible = igFiltered.filter(p => p.lat && p.lng);
+  visible.forEach(post => {
+    const marker = L.marker([post.lat, post.lng], {icon:makeIgIcon()});
+    const cap    = (post.caption_preview||post.caption||'').slice(0,120);
+    marker.bindTooltip(
+      `<b style="color:#e1306c">@${post.account}</b><br>${cap}...<br><span style="color:#555880">${post.date} · ${post.incident_type}</span>`,
+      {className:'leaflet-tooltip', sticky:true}
+    );
+    marker.on('click', () => highlightIgPost(post.shortcode));
+    marker.addTo(igMarkerGroup);
+  });
 }
 
+function highlightIgPost(shortcode) {
+  // Open feed if closed
+  if (!igPanelOpen) { toggleIgPanel(); }
+
+  // Scroll to post and highlight
+  setTimeout(() => {
+    const el = document.getElementById('igp-' + shortcode);
+    if (el) {
+      el.scrollIntoView({behavior:'smooth', block:'center'});
+      document.querySelectorAll('.ig-post').forEach(e=>e.classList.remove('highlighted'));
+      el.classList.add('highlighted');
+    }
+  }, 350);
+}
+
+// ══════════════════════════════════════════════════════════════
+// FILTERS & VIEWS
+// ══════════════════════════════════════════════════════════════
+function getFiltered() {
+  return currentType === 'all' ? INCIDENTS : INCIDENTS.filter(d=>d.type===currentType);
+}
 function setTypeFilter(type, btn) {
   currentType = type;
-  document.querySelectorAll('.tf').forEach(b => b.classList.remove('on'));
+  document.querySelectorAll('.tf').forEach(b=>b.classList.remove('on'));
   btn.classList.add('on');
   renderMap();
 }
-
 function setView(v) {
   currentView = v;
-  ['pins','heat','cluster'].forEach(x => {
-    document.getElementById('vb-'+x).classList.toggle('on', x===v);
-  });
+  ['pins','heat','cluster'].forEach(x=>document.getElementById('vb-'+x).classList.toggle('on',x===v));
   renderMap();
 }
-
-// ============================================================
-// STATS
-// ============================================================
 function updateStats(data) {
-  document.getElementById('s-count').textContent   = data.length;
-  document.getElementById('s-deaths').textContent  = data.reduce((a,d)=>a+d.deaths,0);
-  document.getElementById('s-states').textContent  = new Set(data.map(d=>d.state)).size;
+  document.getElementById('s-count').textContent  = data.length;
+  document.getElementById('s-deaths').textContent = data.reduce((a,d)=>a+d.deaths,0);
+  document.getElementById('s-states').textContent = new Set(data.map(d=>d.state)).size;
 }
 
-// ============================================================
-// OPEN CASE
-// ============================================================
+// ══════════════════════════════════════════════════════════════
+// OPEN CASE PANEL
+// ══════════════════════════════════════════════════════════════
 function openCase(id) {
-  const d = INCIDENTS.find(i => i.id === id);
+  const d = INCIDENTS.find(i=>i.id===id);
   if (!d) return;
   selectedId = id;
 
-  // Re-render markers to highlight selected
-  if (currentView === 'pins') {
-    allMarkers.forEach(m => {
-      const inc = INCIDENTS.find(i => i.id === m.id);
-      const size = Math.min(22, 12 + Math.sqrt(inc.deaths + inc.injured) * 1.2);
-      m.marker.setIcon(makeIcon(m.color, size, m.id === id));
+  if (currentView==='pins') {
+    allMarkers.forEach(m=>{
+      const inc = INCIDENTS.find(i=>i.id===m.id);
+      const size = Math.min(22,12+Math.sqrt(inc.deaths+inc.injured)*1.2);
+      m.marker.setIcon(makeIcon(m.color,size,m.id===id));
     });
   }
 
-  // Fly to location
-  map.flyTo([d.lat, d.lng], 8, { duration: 0.8 });
+  map.flyTo([d.lat,d.lng],8,{duration:0.8});
+  const color   = TYPE_COLOR[d.type]||'#888';
+  const oc      = OUTCOME_CONFIG[d.outcome]||OUTCOME_CONFIG.ongoing;
+  const related = INCIDENTS.filter(i=>(d.related||[]).includes(i.id));
 
-  const color  = TYPE_COLOR[d.type] || '#888';
-  const oc     = OUTCOME_CONFIG[d.outcome] || OUTCOME_CONFIG.ongoing;
-  const related = INCIDENTS.filter(i => (d.related||[]).includes(i.id));
-
-  const html = `
+  document.getElementById('case-scroll').innerHTML = `
     <div>
-      <span class="case-type-tag" style="background:${color}22;color:${color}">
-        ● ${d.type}
-      </span>
-
+      <span class="case-type-tag" style="background:${color}22;color:${color}">● ${d.type}</span>
       <div class="case-title">${d.title}</div>
-
       <div class="case-meta-row">
-        <div class="meta-chip">📅 <b>${d.date || d.year}</b></div>
+        <div class="meta-chip">📅 <b>${d.date||d.year}</b></div>
         <div class="meta-chip">📍 <b>${d.district}, ${d.state}</b></div>
-        ${d.deaths > 0 ? `<div class="meta-chip" style="border-color:rgba(240,62,62,0.4)">☠ <b style="color:#f03e3e">${d.deaths} killed</b></div>` : ''}
-        ${d.injured > 0 ? `<div class="meta-chip">🤕 <b>${d.injured} injured</b></div>` : ''}
+        ${d.deaths>0?`<div class="meta-chip" style="border-color:rgba(240,62,62,0.4)">☠ <b style="color:#f03e3e">${d.deaths} killed</b></div>`:''}
+        ${d.injured>0?`<div class="meta-chip">🤕 <b>${d.injured} injured</b></div>`:''}
       </div>
-
-      <div class="outcome-badge" style="background:${oc.bg};color:${oc.color}">
-        ${oc.icon} ${oc.text} — <span style="opacity:0.8;font-size:11px">${d.outcome_text}</span>
-      </div>
-
+      <div class="outcome-badge" style="background:${oc.bg};color:${oc.color}">${oc.icon} ${oc.text} — <span style="opacity:0.8;font-size:11px">${d.outcome_text}</span></div>
       <div class="case-section-title">What Happened</div>
       <div class="case-desc">${d.description}</div>
-
       <div class="case-divider"></div>
-
-      ${d.timeline ? `
-        <div class="case-section-title">Timeline</div>
-        <div class="timeline">
-          ${d.timeline.map(t => `
-            <div class="tl-item ${t.key?'key':''}">
-              <div class="tl-date">${t.date}</div>
-              <div class="tl-text">${t.text}</div>
-            </div>
-          `).join('')}
-        </div>
-      ` : ''}
-
+      ${d.timeline?`<div class="case-section-title">Timeline</div><div class="timeline">${d.timeline.map(t=>`<div class="tl-item ${t.key?'key':''}"><div class="tl-date">${t.date}</div><div class="tl-text">${t.text}</div></div>`).join('')}</div>`:''}
       <div class="case-divider"></div>
-
       <div class="info-grid">
-        <div class="info-box">
-          <div class="info-box-label">Victims</div>
-          <div class="info-box-val">${(d.victims||[]).join('<br>')}</div>
-        </div>
-        <div class="info-box">
-          <div class="info-box-label">Accused / Perpetrators</div>
-          <div class="info-box-val">${(d.accused||[]).join('<br>')}</div>
-        </div>
+        <div class="info-box"><div class="info-box-label">Victims</div><div class="info-box-val">${(d.victims||[]).join('<br>')}</div></div>
+        <div class="info-box"><div class="info-box-label">Accused / Perpetrators</div><div class="info-box-val">${(d.accused||[]).join('<br>')}</div></div>
       </div>
-
-      ${d.tags ? `
-        <div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:16px">
-          ${d.tags.map(t=>`<span style="background:var(--card);border:1px solid var(--border2);padding:2px 8px;border-radius:20px;font-family:var(--mono);font-size:9px;color:var(--muted)">#${t}</span>`).join('')}
-        </div>
-      ` : ''}
-
+      ${d.tags?`<div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:16px">${d.tags.map(t=>`<span style="background:var(--card);border:1px solid var(--border2);padding:2px 8px;border-radius:20px;font-family:var(--mono);font-size:9px;color:var(--muted)">#${t}</span>`).join('')}</div>`:''}
       <div class="case-divider"></div>
-
       <div class="case-section-title">📰 Related Articles & Sources</div>
-      ${(d.articles||[]).map(a => `
-        <a class="article-card" href="${a.url}" target="_blank" rel="noopener">
-          <span class="ext-icon">↗</span>
-          <div class="article-source" style="color:${a.color}">${a.source}</div>
-          <div class="article-title">${a.title}</div>
-          <div class="article-date">${a.date}</div>
-        </a>
-      `).join('')}
-
-      ${related.length > 0 ? `
-        <div class="case-divider"></div>
-        <div class="case-section-title">🔗 Related Cases (${related.length})</div>
-        ${related.map(r => `
-          <div class="related-case" onclick="openCase(${r.id})">
-            <div class="rc-dot" style="background:${TYPE_COLOR[r.type]||'#888'}"></div>
-            <div class="rc-title">${r.title}</div>
-            <div class="rc-year">${r.year}</div>
-          </div>
-        `).join('')}
-      ` : ''}
-
+      ${(d.articles||[]).map(a=>`<a class="article-card" href="${a.url}" target="_blank" rel="noopener"><span class="ext-icon">↗</span><div class="article-source" style="color:${a.color}">${a.source}</div><div class="article-title">${a.title}</div><div class="article-date">${a.date}</div></a>`).join('')}
+      ${related.length>0?`<div class="case-divider"></div><div class="case-section-title">🔗 Related Cases (${related.length})</div>${related.map(r=>`<div class="related-case" onclick="openCase(${r.id})"><div class="rc-dot" style="background:${TYPE_COLOR[r.type]||'#888'}"></div><div class="rc-title">${r.title}</div><div class="rc-year">${r.year}</div></div>`).join('')}`:''}
       <div style="height:20px"></div>
-    </div>
-  `;
+    </div>`;
 
-  document.getElementById('case-scroll').innerHTML = html;
   document.getElementById('case-scroll').scrollTop = 0;
-
-  const panel = document.getElementById('case-panel');
-  const closeBtn = document.getElementById('panel-close');
-  panel.classList.add('open');
-  closeBtn.classList.add('show');
+  document.getElementById('case-panel').classList.add('open');
+  document.getElementById('panel-close').classList.add('show');
 }
 
 function closePanel() {
   document.getElementById('case-panel').classList.remove('open');
   document.getElementById('panel-close').classList.remove('show');
   selectedId = null;
-  if (currentView === 'pins') renderMap();
+  if (currentView==='pins') renderMap();
 }
 
-// ============================================================
+// ══════════════════════════════════════════════════════════════
 // SEARCH
-// ============================================================
+// ══════════════════════════════════════════════════════════════
 function searchCases(q) {
   if (!q.trim()) return;
-  const ql = q.toLowerCase();
-  const hits = INCIDENTS.filter(d =>
-    d.title.toLowerCase().includes(ql) ||
-    d.state.toLowerCase().includes(ql) ||
-    d.description.toLowerCase().includes(ql) ||
-    (d.tags||[]).some(t => t.includes(ql))
+  const ql   = q.toLowerCase();
+  const hits = INCIDENTS.filter(d=>
+    d.title.toLowerCase().includes(ql)||
+    d.state.toLowerCase().includes(ql)||
+    d.description.toLowerCase().includes(ql)||
+    (d.tags||[]).some(t=>t.includes(ql))
   );
-  if (hits.length === 1) {
-    openCase(hits[0].id);
-  } else if (hits.length > 1) {
+  if (hits.length===1) { openCase(hits[0].id); return; }
+  if (hits.length>1) {
     document.getElementById('case-scroll').innerHTML = `
       <div style="padding:10px 0 8px;font-family:var(--mono);font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:2px">${hits.length} results for "${q}"</div>
-      ${hits.map(d => `
-        <div class="related-case" onclick="openCase(${d.id})" style="margin-bottom:6px">
-          <div class="rc-dot" style="background:${TYPE_COLOR[d.type]||'#888'}"></div>
-          <div>
-            <div class="rc-title">${d.title}</div>
-            <div class="rc-year">${d.year} · ${d.state}</div>
-          </div>
-        </div>
-      `).join('')}
-    `;
+      ${hits.map(d=>`<div class="related-case" onclick="openCase(${d.id})"><div class="rc-dot" style="background:${TYPE_COLOR[d.type]||'#888'}"></div><div><div class="rc-title">${d.title}</div><div class="rc-year">${d.year} · ${d.state}</div></div></div>`).join('')}`;
     document.getElementById('case-panel').classList.add('open');
     document.getElementById('panel-close').classList.add('show');
   }
 }
 
-// ============================================================
+// ══════════════════════════════════════════════════════════════
+// INSTAGRAM PANEL
+// ══════════════════════════════════════════════════════════════
+function toggleIgPanel() {
+  igPanelOpen = !igPanelOpen;
+  document.getElementById('ig-panel').classList.toggle('open', igPanelOpen);
+  document.getElementById('ig-toggle').classList.toggle('on', igPanelOpen);
+}
+
+function setIgAccount(acc, btn) {
+  igAccFilter = acc;
+  document.querySelectorAll('.ig-acc-pill').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  applyIgFilters();
+}
+
+function setIgSort(mode, btn) {
+  igSortMode = mode;
+  document.querySelectorAll('.ig-sort-btn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  applyIgFilters();
+}
+
+function igSearch(q) {
+  igSearchQuery = q;
+  applyIgFilters();
+}
+
+function applyIgFilters() {
+  let data = [...igData];
+
+  // Account filter
+  if (igAccFilter !== 'all') data = data.filter(p=>p.account===igAccFilter);
+
+  // Search
+  if (igSearchQuery.trim()) {
+    const ql = igSearchQuery.toLowerCase();
+    data = data.filter(p=>
+      (p.caption||'').toLowerCase().includes(ql)||
+      (p.location_name||'').toLowerCase().includes(ql)||
+      (p.incident_type||'').toLowerCase().includes(ql)||
+      (p.hashtags||[]).some(h=>h.toLowerCase().includes(ql))
+    );
+  }
+
+  // Sort
+  if (igSortMode==='date')    data.sort((a,b)=>new Date(b.date)-new Date(a.date));
+  if (igSortMode==='likes')   data.sort((a,b)=>b.likes-a.likes);
+  if (igSortMode==='hate')    data.sort((a,b)=>b.hate_score-a.hate_score);
+  if (igSortMode==='urgency') data.sort((a,b)=>b.urgency_score-a.urgency_score);
+
+  igFiltered = data;
+  renderIgFeed();
+  renderIgMarkers();
+  updateIgStats();
+}
+
+function updateIgStats() {
+  document.getElementById('ig-s-total').textContent   = igData.length;
+  document.getElementById('ig-s-geo').textContent     = igData.filter(p=>p.lat).length;
+  document.getElementById('ig-s-urgent').textContent  = igData.filter(p=>p.urgency_score>=3).length;
+  document.getElementById('ig-s-showing').textContent = igFiltered.length;
+  document.getElementById('ig-count').textContent     = igData.length;
+  document.getElementById('ig-stats-bar').style.display = igData.length ? 'flex' : 'none';
+}
+
+function renderIgFeed() {
+  const feed = document.getElementById('ig-feed');
+
+  if (!igData.length) {
+    document.getElementById('ig-load-banner').style.display = 'block';
+    return;
+  }
+  document.getElementById('ig-load-banner').style.display = 'none';
+
+  if (!igFiltered.length) {
+    feed.innerHTML = `<div style="padding:30px 10px;text-align:center;color:var(--muted);font-family:var(--mono);font-size:10px">No posts match filters</div>`;
+    return;
+  }
+
+  const COLOR_MAP = {
+    "Mob Lynching":     {bg:"rgba(240,62,62,0.15)",  c:"#f03e3e"},
+    "Physical Assault": {bg:"rgba(253,126,20,0.15)", c:"#fd7e14"},
+    "Property Attack":  {bg:"rgba(32,201,151,0.15)", c:"#20c997"},
+    "Communal Riot":    {bg:"rgba(151,117,250,0.15)",c:"#9775fa"},
+    "Hate Speech":      {bg:"rgba(247,131,172,0.15)",c:"#f783ac"},
+    "Threats/Coercion": {bg:"rgba(77,171,247,0.15)", c:"#4dabf7"},
+    "General Report":   {bg:"rgba(85,88,128,0.15)",  c:"#555880"},
+    "Arrest/FIR":       {bg:"rgba(245,159,0,0.15)",  c:"#f59f00"},
+    "Bulldozer Action": {bg:"rgba(253,126,20,0.15)", c:"#fd7e14"},
+    "Cow Vigilantism":  {bg:"rgba(240,62,62,0.15)",  c:"#f03e3e"},
+  };
+
+  feed.innerHTML = igFiltered.slice(0, 200).map(post => {
+    const initials = ACC_INITIALS[post.account] || post.account.slice(0,2).toUpperCase();
+    const cm       = COLOR_MAP[post.incident_type] || COLOR_MAP["General Report"];
+    const hateArr  = Array.from({length:10},(_,i)=>
+      `<div class="ig-hate-dot ${i<post.hate_score?'on':''}"></div>`
+    ).join('');
+    const capPreview = (post.caption_preview || post.caption || '').slice(0,200);
+    const hasLoc   = post.lat && post.lng;
+
+    return `<div class="ig-post" id="igp-${post.shortcode}" onclick="igPostClick(this,'${post.shortcode}')">
+      <div class="ig-post-head">
+        <div class="ig-avatar">${initials}</div>
+        <div class="ig-post-meta">
+          <div class="ig-post-acc">@${post.account}</div>
+          <div class="ig-post-date">${post.date}${post.is_video?' · 🎥':''}</div>
+        </div>
+        <span class="ig-type-badge" style="background:${cm.bg};color:${cm.c}">${post.incident_type}</span>
+      </div>
+
+      <div class="ig-caption">${escHtml(capPreview)}</div>
+
+      <div class="ig-post-footer">
+        <span class="ig-stat">❤️ <b>${(post.likes||0).toLocaleString()}</b></span>
+        <span class="ig-stat">💬 <b>${(post.comments||0).toLocaleString()}</b></span>
+        ${post.is_video && post.video_views ? `<span class="ig-stat">👁 <b>${post.video_views.toLocaleString()}</b></span>` : ''}
+        ${hasLoc
+          ? `<span class="ig-loc">📍 ${post.location_name}</span>
+             <button class="ig-map-pin-btn" onclick="flyToIgPost(event,'${post.shortcode}')">🗺 Map</button>`
+          : `<span class="ig-no-loc">No location</span>`
+        }
+      </div>
+
+      ${post.hate_score > 0 ? `
+        <div class="ig-hate-bar">
+          <span class="ig-hate-label">Hate</span>
+          <div class="ig-hate-dots">${hateArr}</div>
+          <span style="font-family:var(--mono);font-size:8px;color:var(--muted)">${post.hate_score}/10</span>
+        </div>` : ''}
+
+      <a class="ig-open-link" href="https://www.instagram.com/p/${post.shortcode}/" target="_blank" rel="noopener" onclick="event.stopPropagation()">↗ Open on Instagram</a>
+    </div>`;
+  }).join('');
+
+  if (igFiltered.length > 200) {
+    feed.innerHTML += `<div style="padding:12px;text-align:center;font-family:var(--mono);font-size:9px;color:var(--muted)">Showing 200 of ${igFiltered.length} posts — use search to narrow down</div>`;
+  }
+}
+
+function igPostClick(el, shortcode) {
+  el.classList.toggle('expanded');
+}
+
+function flyToIgPost(evt, shortcode) {
+  evt.stopPropagation();
+  const post = igData.find(p=>p.shortcode===shortcode);
+  if (post && post.lat && post.lng) {
+    map.flyTo([post.lat, post.lng], 9, {duration:0.8});
+  }
+}
+
+function escHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ══════════════════════════════════════════════════════════════
+// LOAD SCRAPED DATA
+// ══════════════════════════════════════════════════════════════
+function loadIgFile(input) {
+  const f = input.files[0];
+  if (!f) return;
+  const r = new FileReader();
+  r.onload = ev => parseIgJson(ev.target.result);
+  r.readAsText(f);
+}
+
+function parseIgJson(text) {
+  try {
+    const data = JSON.parse(text);
+    igData = Array.isArray(data) ? data : (data.posts || []);
+    igData = igData.filter(p=>
+      ['theobserverpost','hindutvawatch','foejmedia'].includes(p.account)
+    );
+    igFiltered = [...igData];
+    igSearchQuery = '';
+    igAccFilter   = 'all';
+    applyIgFilters();
+
+    // Auto-open panel
+    if (!igPanelOpen) toggleIgPanel();
+    document.querySelector('.ig-acc-pill[data-acc="all"]').classList.add('on');
+
+    console.log(`Loaded ${igData.length} Instagram posts`);
+  } catch(e) {
+    alert('Could not parse JSON file. Make sure it is scraped_data.json from scraper.py');
+    console.error(e);
+  }
+}
+
+// ── Demo data (so you can see the UI without scraping) ────────
+function loadDemoData() {
+  const demo = {posts: [
+    {account:"hindutvawatch",shortcode:"ABC123",url:"https://www.instagram.com/p/ABC123/",source:"Instagram",date:"2024-03-15",datetime_utc:"2024-03-15T08:30:00",year:2024,month:3,caption:"BREAKING: Muslim man lynched in Alwar district Rajasthan today. Mob of 50+ people attacked him while he was transporting cattle. Police arrived 3 hours later. #AlwarLynching #CommunalViolence #Rajasthan",caption_preview:"BREAKING: Muslim man lynched in Alwar district Rajasthan today. Mob of 50+ people attacked him while he was transporting cattle.",hashtags:["AlwarLynching","CommunalViolence","Rajasthan"],mentions:[],likes:2340,comments:156,video_views:0,is_video:false,is_carousel:false,post_type:"GraphImage",location_name:"Alwar",lat:27.56,lng:76.60,all_locations:[{name:"Alwar",lat:27.56,lng:76.60}],geo_tag:null,incident_type:"Mob Lynching",all_incident_types:["Mob Lynching"],hate_score:3,hate_keywords_found:["beef"],urgency_score:4,thumbnail_url:""},
+    {account:"theobserverpost",shortcode:"DEF456",url:"https://www.instagram.com/p/DEF456/",source:"Instagram",date:"2024-02-28",datetime_utc:"2024-02-28T14:00:00",year:2024,month:2,caption:"Bulldozers demolish Muslim homes in Nuh Mewat Haryana without any notice. Hundreds displaced. This is collective punishment. #Nuh #Mewat #BulldozerJustice #Haryana",caption_preview:"Bulldozers demolish Muslim homes in Nuh Mewat Haryana without any notice. Hundreds displaced.",hashtags:["Nuh","Mewat","BulldozerJustice","Haryana"],mentions:[],likes:4521,comments:312,video_views:89000,is_video:true,is_carousel:false,post_type:"GraphVideo",location_name:"Nuh",lat:28.09,lng:77.00,all_locations:[{name:"Nuh",lat:28.09,lng:77.00},{name:"Haryana",lat:29.05,lng:76.08}],geo_tag:null,incident_type:"Bulldozer Action",all_incident_types:["Bulldozer Action","Property Attack"],hate_score:2,hate_keywords_found:[],urgency_score:3,thumbnail_url:""},
+    {account:"foejmedia",shortcode:"GHI789",url:"https://www.instagram.com/p/GHI789/",source:"Instagram",date:"2024-01-10",datetime_utc:"2024-01-10T10:15:00",year:2024,month:1,caption:"Dharam Sansad in Haridwar Uttarakhand — religious leaders call for genocide of Muslims again. No arrests made by police. Complete impunity. #DharamSansad #HateSpeech #Haridwar",caption_preview:"Dharam Sansad in Haridwar Uttarakhand — religious leaders call for genocide of Muslims again. No arrests made.",hashtags:["DharamSansad","HateSpeech","Haridwar"],mentions:[],likes:1876,comments:98,video_views:0,is_video:false,is_carousel:false,post_type:"GraphImage",location_name:"Haridwar",lat:29.94,lng:78.16,all_locations:[{name:"Haridwar",lat:29.94,lng:78.16}],geo_tag:null,incident_type:"Hate Speech",all_incident_types:["Hate Speech"],hate_score:6,hate_keywords_found:["genocide","dharam sansad"],urgency_score:2,thumbnail_url:""},
+    {account:"hindutvawatch",shortcode:"JKL012",url:"https://www.instagram.com/p/JKL012/",source:"Instagram",date:"2023-12-05",datetime_utc:"2023-12-05T16:45:00",year:2023,month:12,caption:"Delhi northeast communal riot anniversary. 53 killed, majority Muslim. 4 years on — key BJP leaders still not charged. #DelhiRiots #Justice #NortheastDelhi",caption_preview:"Delhi northeast communal riot anniversary. 53 killed, majority Muslim. 4 years on — key BJP leaders still not charged.",hashtags:["DelhiRiots","Justice","NortheastDelhi"],mentions:[],likes:6780,comments:445,video_views:0,is_video:false,is_carousel:false,post_type:"GraphImage",location_name:"Delhi",lat:28.68,lng:77.29,all_locations:[{name:"Delhi",lat:28.61,lng:77.20}],geo_tag:null,incident_type:"Communal Riot",all_incident_types:["Communal Riot"],hate_score:1,hate_keywords_found:[],urgency_score:1,thumbnail_url:""},
+    {account:"foejmedia",shortcode:"MNO345",url:"https://www.instagram.com/p/MNO345/",source:"Instagram",date:"2023-11-20",datetime_utc:"2023-11-20T09:00:00",year:2023,month:11,caption:"URGENT: Muslim youth arrested under UAPA in Uttar Pradesh for sharing news article on WhatsApp. This is the reality of free speech in India. #UAPA #UP #MuslimYouth #PressedFreedom",caption_preview:"URGENT: Muslim youth arrested under UAPA in Uttar Pradesh for sharing news article on WhatsApp.",hashtags:["UAPA","UP","MuslimYouth"],mentions:[],likes:3210,comments:201,video_views:0,is_video:false,is_carousel:true,post_type:"GraphSidecar",location_name:"Uttar Pradesh",lat:26.84,lng:80.94,all_locations:[{name:"Uttar Pradesh",lat:26.84,lng:80.94}],geo_tag:null,incident_type:"Arrest/FIR",all_incident_types:["Arrest/FIR","Threats/Coercion"],hate_score:0,hate_keywords_found:[],urgency_score:4,thumbnail_url:""},
+  ]};
+  parseIgJson(JSON.stringify(demo));
+}
+
+// ══════════════════════════════════════════════════════════════
+// AUTO-LOAD scraped_data.json (if served from same directory)
+// ══════════════════════════════════════════════════════════════
+async function tryAutoLoad() {
+  try {
+    const r = await fetch('scraped_data.json');
+    if (r.ok) {
+      const text = await r.text();
+      parseIgJson(text);
+      console.log('✓ Auto-loaded scraped_data.json');
+    }
+  } catch(e) {
+    // No file — user will load manually
+  }
+}
+
+// ══════════════════════════════════════════════════════════════
 // BOOT
-// ============================================================
+// ══════════════════════════════════════════════════════════════
 window.onload = () => {
   initMap();
   renderMap();
+  tryAutoLoad();
   setTimeout(() => {
     const l = document.getElementById('loading');
     l.style.opacity = '0';
-    setTimeout(() => l.style.display = 'none', 400);
+    setTimeout(()=>l.style.display='none', 400);
   }, 600);
 };
 </script>
